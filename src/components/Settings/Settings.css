@@ -1,0 +1,26 @@
+.search-label {
+    padding: 4px 7px;
+    margin: 4px 4px;
+    text-align: right;
+}
+
+.search-select {
+    padding: 4px 7px;
+    margin: 4px 4px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 10em;
+    align-content: baseline;
+    font-size: 12pt;
+}
+
+.search-button {
+    font-size: 14pt;
+    font-weight: 400;
+    width: 5em;
+    background:#f88e37;
+    color: black;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px #00000033;
+    margin-left: 1.5em;
+}

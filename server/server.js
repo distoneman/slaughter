@@ -2,6 +2,8 @@ const express = require('express');
 const massive = require('massive');
 // const moment = require('moment')
 require('dotenv').config();
+const settingsCtrl = require('./settingsController');
+
 
 const { SERVER_PORT, CONNECTION_STRING } = process.env;
 
@@ -18,3 +20,8 @@ massive(CONNECTION_STRING).then(connection => {
     app.listen(SERVER_PORT, () => console.log(`Server running on port ${SERVER_PORT}`))
 }).catch(err => console.log(err));
 
+// SETTINGS
+app.get('/settings/years/:animalType', settingsCtrl.years);
+app.get('/settings/get_daily/:animalType&:year&:month', settingsCtrl.getDailyDetail)
+app.get('/settings/getDefault/:animalType&:month', settingsCtrl.getMonthlyDefault)
+// app.post('/settings/test/:statement' , settingsCtrl.insertTest);

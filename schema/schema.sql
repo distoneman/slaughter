@@ -14,7 +14,7 @@ CREATE TABLE k_slots(
     slot_date DATE,
     animal_type VARCHAR(20),
     max_slots NUMERIC(10,0),
-    used_slots NUMERIC(10,2),
+    used_slots NUMERIC(10,0),
     notes VARCHAR(250));
     
 CREATE TABLE k_animal_type(
@@ -25,8 +25,9 @@ CREATE TABLE k_sched_status(
     status_id serial PRIMARY KEY,
     sched_status VARCHAR(50));
 
-CREATE TABLE k_months(
+CREATE TABLE k_monthly_defaults(
     id serial PRIMARY KEY,
-    kill_year VARCHAR(8),
-    kill_month VARCHAR(20));
-    
+    animal_type VARCHAR(20),
+    kill_month VARCHAR(25),
+    default_max_slots NUMERIC(10,0)
+    );
