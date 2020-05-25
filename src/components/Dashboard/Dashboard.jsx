@@ -77,13 +77,15 @@ export default class Dashboard extends Component {
                         console.log("Today is Weekend");
                         break;
                     default:
-                        await this.addTest(date, defaultMaxSlots)
+                        await this.addSlots(date, defaultMaxSlots)
                 }
             }
+            alert("slots added")
+            this.getDailyDetail()
         }
     }
 
-    addTest = async (slot_date, max_slots) => {
+    addSlots = async (slot_date, max_slots) => {
         await axios.post('/settings/addSlots', {
             slot_date: moment(slot_date).format('l'),
             animal_type: this.state.animalType,
@@ -95,7 +97,7 @@ export default class Dashboard extends Component {
         await this.setState({
             scheduleModal: !this.state.scheduleModal
         })
-        if(this.state.scheduleModal === false){
+        if (this.state.scheduleModal === false) {
             this.getDailyDetail();
         }
         console.log(this.state.scheduleModal)
@@ -114,7 +116,7 @@ export default class Dashboard extends Component {
                         <div className='search-item' key={day.id}>{fDate}</div>
                         <div className='search-item'>{day.animal_type}</div>
                         <div className='search-item'>{day.used_slots}/{day.max_slots}
-                            <FaCalendarPlus className='fa-icon' onClick={this.toggleSchedule}/>
+                            <FaCalendarPlus className='fa-icon' onClick={this.toggleSchedule} />
                         </div>
                         <div className='search-item'>Edit Slots</div>
                     </>
@@ -129,9 +131,9 @@ export default class Dashboard extends Component {
                     <div className="schedule-view">
                         <button className='close-schedule-modal' onClick={this.toggleSchedule}>X</button>
                         <Schedule
-                        //   searchType={this.props.searchType}
-                        // id={this.props.id}
-                    />
+                        //  searchType={this.props.searchType}
+                        //  id={id}
+                        />
                     </div>
                 ) : (
                         null
