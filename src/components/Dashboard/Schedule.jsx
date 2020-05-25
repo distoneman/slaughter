@@ -21,7 +21,7 @@ export default class Schedule extends Component {
     render() {
         return (
             <div>
-                Schedule
+                Schedule {this.props.id}
            </div>
         )
     }

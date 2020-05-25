@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import moment from 'moment';
 import { FaCalendarPlus } from 'react-icons/fa';
-import Schedule from './Schedule';
+import DisplayDays from './DisplayDays';
 
 import './Dashboard.css';
 
@@ -15,7 +15,6 @@ export default class Dashboard extends Component {
             searchMonth: '',
             daysInMonth: 0,
             dailyDetail: [],
-            scheduleModal: false
         }
     }
 
@@ -93,15 +92,15 @@ export default class Dashboard extends Component {
         })
     }
 
-    toggleSchedule = async () => {
-        await this.setState({
-            scheduleModal: !this.state.scheduleModal
-        })
-        if (this.state.scheduleModal === false) {
-            this.getDailyDetail();
-        }
-        console.log(this.state.scheduleModal)
-    }
+    // toggleSchedule = async () => {
+    //     await this.setState({
+    //         scheduleModal: !this.state.scheduleModal
+    //     })
+    //     if (this.state.scheduleModal === false) {
+    //         this.getDailyDetail();
+    //     }
+    //     console.log(this.state.scheduleModal)
+    // }
 
 
     render() {
@@ -112,14 +111,24 @@ export default class Dashboard extends Component {
             var displayDays = this.state.dailyDetail.map(day => {
                 let fDate = moment(day.slot_date).format('MM/D, dddd')
                 return (
-                    <>
-                        <div className='search-item' key={day.id}>{fDate}</div>
-                        <div className='search-item'>{day.animal_type}</div>
-                        <div className='search-item'>{day.used_slots}/{day.max_slots}
-                            <FaCalendarPlus className='fa-icon' onClick={this.toggleSchedule} />
-                        </div>
-                        <div className='search-item'>Edit Slots</div>
-                    </>
+                    // <>
+                    //     <div className='search-item' key={day.id}>{fDate}</div>
+                    //     <div className='search-item'>{day.animal_type}</div>
+                    //     <div className='search-item'>{day.used_slots}/{day.max_slots}
+                    //         <FaCalendarPlus className='fa-icon' onClick={this.toggleSchedule} />
+                    //     </div>
+                    //     <div className='search-item'>Edit Slots</div>
+                    // </>
+                    <DisplayDays
+                        key={day.id}
+                        id={day.id}
+                        fDate = {fDate}
+                        animal_type = {day.animal_type}
+                        used_slots = {day.used_slots}
+                        max_slots = {day.max_slots}
+                        getDailyDetail = {this.getDailyDetail}
+                    />
+
                 )
             })
         }
@@ -127,18 +136,6 @@ export default class Dashboard extends Component {
 
         return (
             <div>
-                {this.state.scheduleModal ? (
-                    <div className="schedule-view">
-                        <button className='close-schedule-modal' onClick={this.toggleSchedule}>X</button>
-                        <Schedule
-                        //  searchType={this.props.searchType}
-                        //  id={id}
-                        />
-                    </div>
-                ) : (
-                        null
-                    )}
-
                 <hr />
                 <label className='search-label'>Animal Type:</label>
                 <select name="animal-type" id="animal-type"
