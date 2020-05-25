@@ -23,12 +23,21 @@ module.exports = {
         res.status(200).send(response)
     },
     getMonthlyDefault: async (req, res) => {
-        console.log("default")
+        // console.log("default")
         let animalType = req.params.animalType
         let month_num = req.params.month
         const db = req.app.get('db')
         let response = await db.settings.defaults({
             animalType, month_num
+        })
+        res.status(200).send(response)
+    },
+    addSlots: async (req, res) => {
+        // console.log(req.body)
+        const {slot_date, animal_type, max_slots} = req.body;
+        const db = req.app.get('db')
+        let response = await db.settings.addSlots({
+            slot_date, animal_type, max_slots
         })
         res.status(200).send(response)
     }

@@ -12,6 +12,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "massive": "^6.4.0",
+    "moment": "^2.26.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",

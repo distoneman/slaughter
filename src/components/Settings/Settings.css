@@ -24,3 +24,58 @@
     text-shadow: 0 1px 1px #00000033;
     margin-left: 1.5em;
 }
+
+.search-results-container,  .search-results-title{
+    width: 50%;
+    display: grid;
+    z-index: 1;
+    /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    margin-left: 3em;
+}
+
+.search-item {
+    border: solid 1px #474545;
+    padding: .4em;
+    font-size: 11pt;
+}
+
+.search-results-item-title {
+    border: solid 1px #474545;
+    background: lightgrey;
+    padding: .25em;
+    font-size: 10pt;
+    font-weight: 700;
+}
+
+.fa-icon{
+    cursor: pointer;
+    color: black;
+    margin-left: 2em;
+}
+
+.schedule-view {
+    background-color:antiquewhite;
+    position: absolute;
+    left: 15rem;
+    z-index: 1;
+    /* height: 18rem; */
+    width: 40rem;
+    border-radius: 10px;
+    border: solid 2px #744a29;
+    box-shadow: 5px 5px 5px rgb(87, 86, 86);
+    padding: 1.5em;
+}
+
+.close-schedule-modal{
+    cursor: pointer;
+    color: #744a29;
+    transition: color .2s;
+    font-weight: 900;
+    position: absolute;
+    right: 1.1rem;
+    top: 1rem;
+    border: none;
+    background: none;
+    font-size: 1rem;
+}

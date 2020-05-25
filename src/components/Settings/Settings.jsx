@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import moment from 'moment';
+import { FaCalendarPlus } from 'react-icons/fa';
+
 import './Settings.css';
 
 export default class Settings extends Component {
@@ -7,9 +10,11 @@ export default class Settings extends Component {
         super(props);
         this.state = {
             animalType: '',
-            searchYear: '', 
+            searchYear: '',
             searchMonth: '',
-            daysInMonth: 0
+            daysInMonth: 0,
+            dailyDetail: [],
+            scheduleModal: false
         }
     }
 
@@ -23,14 +28,10 @@ export default class Settings extends Component {
         console.log(this.state)
     }
 
-    // async getAvailableYears(animalType){
-    //     console.log(animalType.target.value)
-    //     const res = await axios.get(`/settings/years/${animalType.target.value}`)
-    //     console.log(res.data)
-    // }
-
-
     getDailyDetail = async () => {
+        this.setState({
+            dailyDetail: []
+        })
         console.log('get daily detail')
         // console.log(this.state.animalType)
         let animalType = this.state.animalType
@@ -43,48 +44,99 @@ export default class Settings extends Component {
             console.log("empty")
         }
         else {
-            console.log(res.data)
+            // console.log(res.data)
+            this.setState({
+                dailyDetail: res.data
+            })
+            await console.log(res.data)
         }
     }
-    
+
 
     addDays = async () => {
         console.log("add Days")
-        // console.log(this.state.month)
-        const res = await axios.get(`/settings/getDefault/${this.state.animalType}&${this.state.searchMonth}`)
-        let defaultMaxSlots = res.data[0].default_max_slots
-        await console.log(defaultMaxSlots)
-        let numDays = 0
-        numDays = new Date(this.state.searchYear, this.state.searchMonth, 0).getDate();
-        console.log(numDays)
-        var i;
-        for(i=1; i <= numDays; i++) {
-            // console.log(i)
-            // console.log(`${this.state.searchMonth}/${i}/${this.state.searchYear}`)
-            var dateStr = `${this.state.searchMonth}/${i}/${this.state.searchYear}`
-            var date = new Date(dateStr)
-            // console.log(typeof date)
-            var day = date.getDay()
-            // console.log(day)
-            switch(day) {
-                case 0:
-                    // console.log("Today is Weekend");
-                break;
-                case 6:
-                // console.log("Today is Weekend");
-                    break;
+        this.getDailyDetail();
+        if (this.state.dailyDetail.length > 0) {
+            console.log("already populated")
+        } else {
+            const res = await axios.get(`/settings/getDefault/${this.state.animalType}&${this.state.searchMonth}`)
+            let defaultMaxSlots = res.data[0].default_max_slots
+            let numDays = 0
+            numDays = new Date(this.state.searchYear, this.state.searchMonth, 0).getDate();
+            var i;
+            for (i = 1; i <= numDays; i++) {
+                var dateStr = `${this.state.searchMonth}/${i}/${this.state.searchYear}`
+                var date = new Date(dateStr)
+                var day = date.getDay()
+                switch (day) {
+                    case 0:
+                        console.log("Today is Weekend");
+                        break;
+                    case 6:
+                        console.log("Today is Weekend");
+                        break;
                     default:
-                    // console.log("Today is business day");
-                    
+                        await this.addTest(date, defaultMaxSlots)
                 }
+            }
         }
+    }
+
+    addTest = async (slot_date, max_slots) => {
+        await axios.post('/settings/addSlots', {
+            slot_date: moment(slot_date).format('l'),
+            animal_type: this.state.animalType,
+            max_slots: max_slots
+        })
+    }
+
+    toggleSchedule = async () => {
+        await this.setState({
+            scheduleModal: !this.state.scheduleModal
+        })
+        if(this.state.scheduleModal === false){
+            this.getDailyDetail();
+        }
+        console.log(this.state.scheduleModal)
     }
 
 
     render() {
+        if (this.state.dailyDetail.length === 0) {
+            var displayDays = "No data for selected criteria click 'Add' button to populate using defaults. Then search again."
+        }
+        else {
+            var displayDays = this.state.dailyDetail.map(day => {
+                let fDate = moment(day.slot_date).format('MM/D, dddd')
+                return (
+                    <>
+                        <div className='search-item' key={day.id}>{fDate}</div>
+                        <div className='search-item'>{day.animal_type}</div>
+                        <div className='search-item'>{day.used_slots}/{day.max_slots}
+                            <FaCalendarPlus className='fa-icon' onClick={this.toggleSchedule}/>
+                        </div>
+                        <div className='search-item'>Edit Slots</div>
+                    </>
+                )
+            })
+        }
+
+
         return (
             <div>
-                <hr/>
+                {this.state.scheduleModal ? (
+                    <div className="schedule-view">
+                        <button className='close-schedule-modal' onClick={this.toggleSchedule}>X</button>
+                        {/* <InvoiceView
+                        searchType={this.props.searchType}
+                        id={this.props.id}
+                    /> */}
+                    </div>
+                ) : (
+                        null
+                    )}
+
+                <hr />
                 <label className='search-label'>Animal Type:</label>
                 <select name="animal-type" id="animal-type"
                     className='search-select'
@@ -105,7 +157,7 @@ export default class Settings extends Component {
                 </select>
                 <label className='search-label'>Month:</label>
                 <select name="month" id="month" className='search-select'
-                    onChange = {e => this.handleChange("searchMonth", e)}>
+                    onChange={e => this.handleChange("searchMonth", e)}>
                     <option value=""></option>
                     <option value="01">January</option>
                     <option value="02">February</option>
@@ -123,8 +175,17 @@ export default class Settings extends Component {
                 <button className='search-button'
                     onClick={this.getDailyDetail} >Search
                 </button>
-                <button onClick={this.addDays}>test</button>
+                <button className='search-button' onClick={this.addDays}>Add</button>
+                <hr />
+                <div className='search-results-title'>
+                    <div className='search-results-item-title'>Date</div>
+                    <div className='search-results-item-title'>Animal</div>
+                    <div className='search-results-item-title'>Used Slots</div>
+                    <div className='search-results-item-title'></div>
+                    {displayDays}
+                </div>
             </div>
         )
     }
 }
+

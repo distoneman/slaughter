@@ -29,5 +29,13 @@ CREATE TABLE k_monthly_defaults(
     id serial PRIMARY KEY,
     animal_type VARCHAR(20),
     kill_month VARCHAR(25),
+    month_num NUMERIC(4,0),
     default_max_slots NUMERIC(10,0)
     );
+
+GRANT ALL PRIVILEGES ON TABLE k_monthly_defaults TO circlev;
+GRANT ALL PRIVILEGES ON TABLE k_animal_type TO circlev;
+GRANT ALL PRIVILEGES ON TABLE k_sched_status TO circlev;
+GRANT ALL PRIVILEGES ON TABLE k_schedule TO circlev;
+GRANT ALL PRIVILEGES ON TABLE k_slots TO circlev;    
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO circlev;

@@ -24,4 +24,4 @@ massive(CONNECTION_STRING).then(connection => {
 app.get('/settings/years/:animalType', settingsCtrl.years);
 app.get('/settings/get_daily/:animalType&:year&:month', settingsCtrl.getDailyDetail)
 app.get('/settings/getDefault/:animalType&:month', settingsCtrl.getMonthlyDefault)
-// app.post('/settings/test/:statement' , settingsCtrl.insertTest);
+app.post('/settings/addSlots' , settingsCtrl.addSlots);
