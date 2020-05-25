@@ -19,20 +19,20 @@ export default class Dashboard extends Component {
     }
 
     async handleChange(key, value) {
-        console.log("handle Change")
-        console.log(key)
-        console.log(value.target.value)
+        // console.log("handle Change")
+        // console.log(key)
+        // console.log(value.target.value)
         await this.setState({
             [key]: value.target.value
         });
-        console.log(this.state)
+        // console.log(this.state)
     }
 
     getDailyDetail = async () => {
         this.setState({
             dailyDetail: []
         })
-        console.log('get daily detail')
+        // console.log('get daily detail')
         // console.log(this.state.animalType)
         let animalType = this.state.animalType
         let year = this.state.searchYear
@@ -41,23 +41,23 @@ export default class Dashboard extends Component {
         )
         // console.log(res)
         if (res.data.length === 0) {
-            console.log("empty")
+            // console.log("empty")
         }
         else {
             // console.log(res.data)
             this.setState({
                 dailyDetail: res.data
             })
-            await console.log(res.data)
+            // await console.log(res.data)
         }
     }
 
 
     addDays = async () => {
-        console.log("add Days")
+        // console.log("add Days")
         this.getDailyDetail();
         if (this.state.dailyDetail.length > 0) {
-            console.log("already populated")
+            // console.log("already populated")
         } else {
             const res = await axios.get(`/settings/getDefault/${this.state.animalType}&${this.state.searchMonth}`)
             let defaultMaxSlots = res.data[0].default_max_slots
@@ -70,10 +70,10 @@ export default class Dashboard extends Component {
                 var day = date.getDay()
                 switch (day) {
                     case 0:
-                        console.log("Today is Weekend");
+                        // console.log("Today is Weekend");
                         break;
                     case 6:
-                        console.log("Today is Weekend");
+                        // console.log("Today is Weekend");
                         break;
                     default:
                         await this.addSlots(date, defaultMaxSlots)

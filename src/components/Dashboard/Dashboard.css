@@ -79,3 +79,8 @@
     background: none;
     font-size: 1rem;
 }
+
+.available-msg {
+    font-size: 2em;
+    color: #071838;
+}

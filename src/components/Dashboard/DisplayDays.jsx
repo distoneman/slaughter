@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { FaPrint, FaTrashAlt, FaEdit, FaSearch, FaEnvelope } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 // import { IoIosMail, IoIosText } from "react-icons/io";
 import { FaCalendarPlus } from 'react-icons/fa';
@@ -23,7 +22,7 @@ export default class DisplayDays extends Component {
         if (this.state.scheduleModal === false) {
             this.props.getDailyDetail();
         }
-        console.log(this.state.scheduleModal)
+        // console.log(this.state.scheduleModal)
     }
 
 
@@ -38,6 +37,7 @@ export default class DisplayDays extends Component {
                         <Schedule
                         //  searchType={this.props.searchType}
                          id={this.props.id}
+                         toggleSchedule={this.toggleSchedule}
                         />
                     </div>
                 ) : (

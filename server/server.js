@@ -3,7 +3,7 @@ const massive = require('massive');
 // const moment = require('moment')
 require('dotenv').config();
 const settingsCtrl = require('./settingsController');
-
+const scheduleCtrl = require('./scheduleController');
 
 const { SERVER_PORT, CONNECTION_STRING } = process.env;
 
@@ -25,3 +25,6 @@ app.get('/settings/years/:animalType', settingsCtrl.years);
 app.get('/settings/get_daily/:animalType&:year&:month', settingsCtrl.getDailyDetail)
 app.get('/settings/getDefault/:animalType&:month', settingsCtrl.getMonthlyDefault)
 app.post('/settings/addSlots' , settingsCtrl.addSlots);
+
+// SCHEDULE
+app.get('/schedule/available_slots/:id', scheduleCtrl.getAvailable);

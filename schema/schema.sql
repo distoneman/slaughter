@@ -1,5 +1,6 @@
 CREATE TABLE k_schedule(
     sched_id serial PRIMARY KEY,
+    k_slots_id NUMERIC(15,0),
     sched_date DATE,
     animal_type VARCHAR(20),
     cust_name VARCHAR(150),
@@ -39,3 +40,5 @@ GRANT ALL PRIVILEGES ON TABLE k_sched_status TO circlev;
 GRANT ALL PRIVILEGES ON TABLE k_schedule TO circlev;
 GRANT ALL PRIVILEGES ON TABLE k_slots TO circlev;    
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO circlev;
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO circlev;
