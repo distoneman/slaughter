@@ -84,3 +84,37 @@
     font-size: 2em;
     color: #071838;
 }
+
+.schedule-form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: .3em .6em;
+    vertical-align: baseline;
+}
+
+.form-label {
+    padding: 4px 7px;
+    margin: 4px 4px;
+    text-align: right;
+}
+
+.form-select {
+    padding: 4px 7px;
+    margin: 4px 4px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 20em;
+    align-content: baseline;
+    font-size: 12pt;
+}
+  
+
+.form-user-input {
+    font-size: 12pt;
+    padding: 4px 7px;
+    margin: 4px 4px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 20em;
+}
+ 

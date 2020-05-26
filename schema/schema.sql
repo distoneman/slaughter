@@ -8,6 +8,7 @@ CREATE TABLE k_schedule(
     sched_status VARCHAR(25),
     status_change_date DATE,
     cancelled_by VARCHAR(75),
+    waitlist_flag BOOLEAN,
     notes VARCHAR(250));
 
 CREATE TABLE k_slots(

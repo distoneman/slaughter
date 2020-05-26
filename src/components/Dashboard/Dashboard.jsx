@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import moment from 'moment';
-import { FaCalendarPlus } from 'react-icons/fa';
 import DisplayDays from './DisplayDays';
 
 import './Dashboard.css';
@@ -10,13 +9,14 @@ export default class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            animalType: '',
+            animalType: 'Beef',
             searchYear: '',
             searchMonth: '',
             daysInMonth: 0,
             dailyDetail: [],
         }
     }
+
 
     async handleChange(key, value) {
         // console.log("handle Change")
@@ -37,8 +37,7 @@ export default class Dashboard extends Component {
         let animalType = this.state.animalType
         let year = this.state.searchYear
         let month = this.state.searchMonth
-        const res = await axios.get(`/settings/get_daily/${animalType}&${year}&${month}`
-        )
+        const res = await axios.get(`/settings/get_daily/${animalType}&${year}&${month}`)
         // console.log(res)
         if (res.data.length === 0) {
             // console.log("empty")
@@ -111,18 +110,11 @@ export default class Dashboard extends Component {
             var displayDays = this.state.dailyDetail.map(day => {
                 let fDate = moment(day.slot_date).format('MM/D, dddd')
                 return (
-                    // <>
-                    //     <div className='search-item' key={day.id}>{fDate}</div>
-                    //     <div className='search-item'>{day.animal_type}</div>
-                    //     <div className='search-item'>{day.used_slots}/{day.max_slots}
-                    //         <FaCalendarPlus className='fa-icon' onClick={this.toggleSchedule} />
-                    //     </div>
-                    //     <div className='search-item'>Edit Slots</div>
-                    // </>
                     <DisplayDays
                         key={day.id}
                         id={day.id}
                         fDate = {fDate}
+                        slot_date = {day.slot_date}
                         animal_type = {day.animal_type}
                         used_slots = {day.used_slots}
                         max_slots = {day.max_slots}
