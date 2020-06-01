@@ -35,22 +35,22 @@ export default class DisplayDays extends Component {
                     <div className="schedule-view">
                         <button className='close-schedule-modal' onClick={this.toggleSchedule}>X</button>
                         <Schedule
-                        //  searchType={this.props.searchType}
-                         id={this.props.id}
-                         toggleSchedule={this.toggleSchedule}
-                         scheduleDate={this.props.fDate}
+                            //  searchType={this.props.searchType}
+                            id={this.props.id}
+                            toggleSchedule={this.toggleSchedule}
+                            scheduleDate={this.props.fDate}
                         />
                     </div>
                 ) : (
                         null
                     )}
 
-                    <div className='search-item' key={this.props.id}>{moment(this.props.slot_date).utc().format('dddd, MMM Do YYYY')}</div>
-                    <div className='search-item'>{this.props.animal_type}</div>
-                    <div className='search-item'>{this.props.used_slots}/{this.props.max_slots}
-                        <FaCalendarPlus className='fa-icon' onClick={this.toggleSchedule} />
-                    </div>
-                    <div className='search-item'>Edit Slots</div>
+                <div className='search-item' key={this.props.id}>{moment(this.props.slot_date).utc().format('dddd, MMM Do YYYY')}</div>
+                <div className='search-item'>{this.props.animal_type}</div>
+                <div className='search-item'>{this.props.used_slots}/{this.props.max_slots}
+                    <FaCalendarPlus className='fa-icon' onClick={this.toggleSchedule} />
+                </div>
+                <div className='search-item'>Edit Slots</div>
             </>
         )
     }

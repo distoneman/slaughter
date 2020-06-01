@@ -107,7 +107,7 @@ export default class Dashboard extends Component {
             var displayDays = "No data for selected criteria click 'Add' button to populate using defaults. Then search again."
         }
         else {
-            var displayDays = this.state.dailyDetail.map(day => {
+            displayDays = this.state.dailyDetail.map(day => {
                 let fDate = moment(day.slot_date).format('MM/D, dddd')
                 return (
                     <DisplayDays

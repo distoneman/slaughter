@@ -8,12 +8,16 @@ export default class Schedule extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            slotId: null,
             available: true,
             numSlotsAvailable: 0,
             schedDate: '',
+            slots: 1,
+            animalType: '',
             customerName: '',
             customerPhone: '',
             notes: '',
+            waitList: false,
             slotsArray: []
         }
 
@@ -30,6 +34,8 @@ export default class Schedule extends Component {
         } else (
             this.setState({
                 available: true,
+                slotId: this.props.id,
+                animalType: res.data[0].animal_type,
                 schedDate: res.data[0].slot_date,
                 numSlotsAvailable: res.data[0].max_slots - res.data[0].used_slots
             })
@@ -40,7 +46,7 @@ export default class Schedule extends Component {
     }
 
     createSlotsArray = async () => {
-        var slotsArray=[];
+        var slotsArray = [];
         var i;
         for (i = 1; i <= this.state.numSlotsAvailable; i++) {
             slotsArray.push(i)
@@ -50,6 +56,41 @@ export default class Schedule extends Component {
             slotsArray: slotsArray
         })
         // console.log(this.state.slotsArray)
+    }
+
+    async handleChange(key, value) {
+        // console.log(key)
+        // console.log(value.target.value)
+        this.setState({
+            [key]: value.target.value
+        })
+        // console.log(this.state)
+    }
+
+    async toggleWaitList() {
+        await this.setState({
+            waitList: !this.state.waitList
+        })
+    }
+
+    addSchedule = async () => {
+        // console.log("add schedule")
+        // console.log(this.state)
+        // console.log(moment().format('l, h:mm:ss a'))
+        for (let i = 1; i <= this.state.slots; i++) {
+            await axios.post("/schedule/addSchedule", {
+                slotId: this.state.slotId,
+                schedDate: moment(this.state.shedDate).format('l'),
+                animalType: this.state.animalType,
+                custName: this.state.custName,
+                custPhone: this.state.custPhone,
+                schedStatus: 'Active',
+                changeDate: moment().format('l,  h:mm:ss a'),
+                waitList: this.state.waitList,
+                notes: this.state.notes
+            })
+        }
+        this.props.toggleSchedule();
     }
 
     render() {
@@ -72,19 +113,28 @@ export default class Schedule extends Component {
                         <hr />
                         <div className='schedule-form'>
                             <label className='form-label'>Number of animals:</label>
-                            <select className="form-user-input" id="slots">
+                            <select className="form-user-input" id="slots"
+                                onChange={e => this.handleChange("slots", e)}>
                                 {/* <option value="beef">Beef</option> */}
                                 {options}
                             </select>
 
                             <label className='form-label'>Customer Name:</label>
-                            <input className='form-user-input' />
+                            <input className='form-user-input'
+                                onChange={e => this.handleChange("custName", e)} />
                             <label className='form-label'>Customer Phone:</label>
-                            <input className='form-user-input' />
+                            <input className='form-user-input'
+                                onChange={e => this.handleChange("custPhone", e)} />
+                            <label className='form-label'>Waitlist:</label>
+                            <input type="checkbox" className='form-checkbox'
+                                checked={this.state.waitList}
+                                onChange={e => this.toggleWaitList()} />
                             <label className='form-label'>Schedule Notes:</label>
-                            <input className='form-user-input' />
+                            <input className='form-user-input'
+                                onChange={e => this.handleChange("notes", e)} />
                             <div></div>
-                            <button className='search-button'>Save</button>
+                            <button className='search-button'
+                                onClick={() => this.addSchedule()}>Save</button>
                         </div>
                     </>
                 ) : (

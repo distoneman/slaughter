@@ -117,4 +117,13 @@
     border-radius: 5px;
     width: 20em;
 }
- 
+
+.form-checkbox {
+    width: 20px;
+    height: 20px;
+    padding: 4px 7px;
+    margin: 6px 4px;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+}
