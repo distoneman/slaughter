@@ -3,7 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { FaChevronCircleRight, FaChevronCircleLeft } from 'react-icons/fa';
 
-
+import DisplayOneDay from './DisplayOneDay';
 import './OneDay.css';
 
 export default class OneDay extends Component {
@@ -35,16 +35,16 @@ export default class OneDay extends Component {
         console.log(date)
         let dow = date.getDay()
         console.log(dow)
-        if(direction === 'add'){
-            switch(dow) {
+        if (direction === 'add') {
+            switch (dow) {
                 case 5:
                     var searchDate = moment(this.state.schedDate).add(3, 'd').format('l')
                     break;
                 default:
                     searchDate = moment(this.state.schedDate).add(1, 'd').format('l')
-            }    
+            }
         } else {
-            switch(dow){
+            switch (dow) {
                 case 1:
                     searchDate = moment(this.state.schedDate).subtract(3, 'd').format('l')
                     break;
@@ -86,19 +86,32 @@ export default class OneDay extends Component {
     render() {
         let displayOneDaySchedule = this.state.daysSchedule.map(slot => {
             return (
-                <>
-                    <div>
-                        {slot.cust_name}
-                    </div>
-                    <div>{slot.cust_phone}</div>
-                </>
+                <DisplayOneDay
+                    key={slot.id}
+                    id={slot.id}
+                    schedDate={slot.sched_date}
+                    animalType={slot.animal_type}
+                    custName={slot.cust_name}
+                    custPhone={slot.cust_phone}
+                    schedStatus={slot.sched_status}
+                    statusChangeDate={slot.status_change_date}
+                    cancelledBy={slot.cancelled_by}
+                    waitlistFlag={slot.waitlist_flag}
+                    notes={slot.notes}
+                />
+                // <>
+                //     <div>
+                //         {slot.cust_name}
+                //     </div>
+                //     <div>{slot.cust_phone}</div>
+                // </DisplayOneDay>
             )
         })
         return (
             <>
                 <div className='header'>
                     <div className='header-content'>
-                        <FaChevronCircleLeft className='btn-arrows' 
+                        <FaChevronCircleLeft className='btn-arrows'
                             onClick={e => this.getScheduleByDate("subtract")} />
                     </div>
                     <div className='header-content'>
@@ -110,7 +123,16 @@ export default class OneDay extends Component {
                     </div>
                 </div>
                 <hr />
-                {displayOneDaySchedule}
+                <div className='schedule-title-row'>
+                    <div className='schedule-title-item'>Animal Type</div>
+                    <div className='schedule-title-item'>Name</div>
+                    <div className='schedule-title-item'>Phone</div>
+                    <div className='schedule-title-item'>Status</div>
+                    <div className='schedule-title-item'>Status Date</div>
+                    <div className='schedule-title-item'>Notes</div>
+                    <div className='schedule-title-item'></div>
+                    {displayOneDaySchedule}
+                </div>
             </>
         )
     }
