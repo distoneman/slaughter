@@ -80,7 +80,7 @@ export default class Schedule extends Component {
         for (let i = 1; i <= this.state.slots; i++) {
             await axios.post("/schedule/addSchedule", {
                 slotId: this.state.slotId,
-                schedDate: moment(this.state.shedDate).format('l'),
+                schedDate: moment(this.state.schedDate).format('l'),
                 animalType: this.state.animalType,
                 custName: this.state.custName,
                 custPhone: this.state.custPhone,

@@ -29,3 +29,4 @@ app.post('/settings/addSlots' , settingsCtrl.addSlots);
 // SCHEDULE
 app.get('/schedule/available_slots/:id', scheduleCtrl.getAvailable);
 app.post('/schedule/addSchedule', scheduleCtrl.addSchedule);
+app.get('/schedule/get_one_day/:id', scheduleCtrl.getOneDay);

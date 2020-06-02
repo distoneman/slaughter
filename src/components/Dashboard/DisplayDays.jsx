@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
 // import { IoIosMail, IoIosText } from "react-icons/io";
-import { FaCalendarPlus } from 'react-icons/fa';
+import { FaCalendarPlus, FaClipboardList } from 'react-icons/fa';
 import Schedule from './Schedule';
 import moment from 'moment';
+import { Link } from "react-router-dom";
+
 
 import './Dashboard.css'
 
@@ -45,7 +47,11 @@ export default class DisplayDays extends Component {
                         null
                     )}
 
-                <div className='search-item' key={this.props.id}>{moment(this.props.slot_date).utc().format('dddd, MMM Do YYYY')}</div>
+                <div className='search-item' key={this.props.id}>{moment(this.props.slot_date).utc().format('dddd, MMM Do YYYY')}
+                <Link to={`/oneday/${this.props.id}`}>
+                    <FaClipboardList className='fa-icon' />
+                </Link>
+                </div>
                 <div className='search-item'>{this.props.animal_type}</div>
                 <div className='search-item'>{this.props.used_slots}/{this.props.max_slots}
                     <FaCalendarPlus className='fa-icon' onClick={this.toggleSchedule} />

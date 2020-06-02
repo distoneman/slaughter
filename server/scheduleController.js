@@ -22,5 +22,14 @@ module.exports = {
         });
         res.status(200).send()
     },
+    getOneDay: async (req, res) => {
+        let id = `${req.params.id}`;
+        // console.log(id)
+        const db = req.app.get('db');
+        let response = await db.settings.getOneDay({
+            id
+        })
+        res.status(200).send(response)
+    }
 
 }

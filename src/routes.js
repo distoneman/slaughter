@@ -9,7 +9,7 @@ export default (
         <Switch>
             <Route exact path='/' component={Dashboard} />
             <Route exact path='/settings' component={Settings} />
-            <Route exact path='/oneday' component={OneDay} />
+            <Route exact path='/oneday/:id' component={OneDay} />
         </Switch>
     // </BrowserRouter>
 )

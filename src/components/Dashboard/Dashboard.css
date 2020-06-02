@@ -26,7 +26,7 @@
 }
 
 .search-results-container,  .search-results-title{
-    width: 50%;
+    width: 60%;
     display: grid;
     z-index: 1;
     /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
@@ -51,7 +51,8 @@
 .fa-icon{
     cursor: pointer;
     color: black;
-    margin-left: 2em;
+    margin-right: .25em;
+    float: right;
 }
 
 .schedule-view {

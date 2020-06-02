@@ -1,0 +1,19 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+.header-content{
+    margin: 1em;
+    color: #123a83;
+    font-size: 18pt;
+}
+
+.btn-arrows{
+    padding-top: 3pt;
+}
+
