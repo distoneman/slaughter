@@ -33,7 +33,7 @@ module.exports = {
         res.status(200).send(response)
     },
     addSlots: async (req, res) => {
-        // console.log(req.body)
+        console.log(req.body)
         const {slot_date, animal_type, max_slots} = req.body;
         const db = req.app.get('db')
         let response = await db.settings.addSlots({

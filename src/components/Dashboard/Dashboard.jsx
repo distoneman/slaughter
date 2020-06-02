@@ -108,7 +108,7 @@ export default class Dashboard extends Component {
         }
         else {
             displayDays = this.state.dailyDetail.map(day => {
-                let fDate = moment(day.slot_date).format('MM/D, dddd')
+                let fDate =( moment(day.slot_date).format('MM/D, dddd'))
                 return (
                     <DisplayDays
                         key={day.id}

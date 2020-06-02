@@ -30,6 +30,16 @@ module.exports = {
             id
         })
         res.status(200).send(response)
+    },
+    getScheduleByDate: async (req, res) => {
+        let schedDate = req.query.schedDate;
+        let animalType = req.query.animalType;
+        // console.log(schedDate)
+        // console.log(animalType)
+        const db = req.app.get('db');
+        let response = await db.settings.getScheduleByDate({
+            schedDate, animalType
+        })
+        res.status(200).send(response)
     }
-
 }
