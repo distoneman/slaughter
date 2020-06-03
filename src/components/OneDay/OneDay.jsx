@@ -12,7 +12,8 @@ export default class OneDay extends Component {
         this.state = {
             schedDate: '',
             animalType: '',
-            daysSchedule: []
+            daysSchedule: [],
+            cancelModal: false
         }
 
     }
@@ -72,6 +73,30 @@ export default class OneDay extends Component {
         }
     }
 
+    // toggleCancelModal = async () => {
+    //     await this.setState({
+    //         cancelModal: !this.state.cancelModal,
+    //         cancelledBy: ''
+    //     })
+    // }
+
+    cancelSchedule = async (id, cancelledBy) => {
+        console.log('cancel schedule')
+        console.log(id)
+        console.log(cancelledBy)
+        let schedDate = this.state.schedDate
+        let animalType = this.state.animalType
+        let statusDate = moment(new Date()).format('l')
+        console.log(statusDate)
+        const res = await axios.put(`/schedule/cancel`,
+            { id, schedDate, animalType, statusDate, cancelledBy })
+        console.log(res.data)
+        this.setState({
+            daysSchedule: res.data
+        })
+        
+    }
+
     async handleChange(key, value) {
         // console.log(key)
         // console.log(value.target.value)
@@ -87,8 +112,8 @@ export default class OneDay extends Component {
         let displayOneDaySchedule = this.state.daysSchedule.map(slot => {
             return (
                 <DisplayOneDay
-                    key={slot.id}
-                    id={slot.id}
+                    key={slot.sched_id}
+                    id={slot.sched_id}
                     schedDate={slot.sched_date}
                     animalType={slot.animal_type}
                     custName={slot.cust_name}
@@ -98,6 +123,8 @@ export default class OneDay extends Component {
                     cancelledBy={slot.cancelled_by}
                     waitlistFlag={slot.waitlist_flag}
                     notes={slot.notes}
+                    cancelSchedule={this.cancelSchedule}
+                    toggleCancelModal={this.toggleCancelModal}
                 />
                 // <>
                 //     <div>
@@ -129,7 +156,6 @@ export default class OneDay extends Component {
                     <div className='schedule-title-item'>Phone</div>
                     <div className='schedule-title-item'>Status</div>
                     <div className='schedule-title-item'>Status Date</div>
-                    <div className='schedule-title-item'>Notes</div>
                     <div className='schedule-title-item'></div>
                     {displayOneDaySchedule}
                 </div>

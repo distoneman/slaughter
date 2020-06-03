@@ -1,2 +1,2 @@
 SELECT * FROM k_schedule
-WHERE sched_date = $(schedDate) AND animal_type = $(animalType);
+WHERE sched_date = $(schedDate) AND animal_type = $(animalType) AND sched_status != 'Replaced';

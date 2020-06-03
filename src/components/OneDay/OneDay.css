@@ -18,11 +18,11 @@
 }
 
 .schedule-title-row{
-    width: 90%;
+    width: 80%;
     display: grid;
     z-index: 1;
     /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
-    grid-template-columns: .7fr 1.5fr 1.2fr .7fr .7fr 1fr 1fr;
+    grid-template-columns: .7fr 1.5fr 1.2fr .7fr .7fr .5fr;
     margin-left: 3em;
 }
 
@@ -33,10 +33,42 @@
     font-size: 10pt;
     font-weight: 700;
 }
+
 .schedule-item {
     border: solid 1px #474545;
     padding: .4em;
     font-size: 11pt;
 }
 
+.fa-icon-left {
+    cursor: pointer;
+    color: #123a83;
+    margin-right: .25em;
+    font-size: 12pt;
+}
 
+.cancel-modal-view {
+    background-color:#b3cbf7;
+    position: absolute;
+    left: 20rem;
+    z-index: 1;
+    /* height: 18rem; */
+    width: 40rem;
+    border-radius: 10px;
+    border: solid 2px #071838;
+    box-shadow: 5px 5px 5px #071838;
+    padding: 1.5em;
+}
+
+.close-cancel-modal{
+    cursor: pointer;
+    color: #071838;
+    transition: color .2s;
+    font-weight: 900;
+    position: absolute;
+    right: 1.1rem;
+    top: 1rem;
+    border: none;
+    background: none;
+    font-size: 1rem;
+}

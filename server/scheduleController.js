@@ -41,5 +41,13 @@ module.exports = {
             schedDate, animalType
         })
         res.status(200).send(response)
+    },
+    cancelSched: async (req, res) => {
+        const {id, schedDate, animalType, statusDate, cancelledBy} = req.body;
+        const db = req.app.get('db');
+        let response = await db.settings.cancelSched({
+            id, schedDate, animalType, statusDate, cancelledBy
+        })
+        res.status(200).send(response)
     }
 }
