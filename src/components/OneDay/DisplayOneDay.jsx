@@ -11,7 +11,8 @@ export default class DisplayOneDay extends Component {
         super(props);
         this.state = {
             cancelModal: false,
-            cancelledBy: ''
+            cancelledBy: '',
+            infoModal: false
         }
     }
 
@@ -20,6 +21,14 @@ export default class DisplayOneDay extends Component {
             cancelModal: !this.state.cancelModal,
             cancelledBy: ''
         })
+    }
+
+    toggleInfoModal = async () => {
+        console.log("info modal")
+        await this.setState({
+            infoModal: !this.state.infoModal
+        })
+        console.log(this.state.infoModal)
     }
 
 
@@ -32,28 +41,45 @@ export default class DisplayOneDay extends Component {
         // console.log(this.state)
     }
 
-    cancel = async() => {
+    cancel = async () => {
         await this.props.cancelSchedule(this.props.id, this.state.cancelledBy)
         await this.toggleCancelModal()
     }
 
     render() {
         return (
-            <> 
+            <>
                 {this.state.cancelModal ? (
                     <div className='cancel-modal-view'>
-                        <button className='close-cancel-modal' onClick={this.props.toggleCancelModal}>X</button>
+                        <button className='close-cancel-modal' onClick={this.toggleCancelModal}>X</button>
                         <label className='form-label'>Cancelled By:</label>
                         <input className='form-user-input'
                             onChange={e => this.handleChange('cancelledBy', e)} />
                         <button className='search-button'
                             onClick={this.cancel}>
-                                Cancel
+                            Cancel
                         </button>
                     </div>
                 ) : (
-                    null
-                )}
+                        null
+                    )}
+
+                {this.state.infoModal ? (
+                    <>
+                        <div className='info-modal-view'>
+                            <button className='close-cancel-modal' onClick={this.toggleInfoModal}>X</button>
+                            <div>
+                                <b>Cancelled By: </b>{this.props.cancelledBy}
+                            </div>
+                            <div>
+                                <b>Schedule Notes: </b>{this.props.notes}
+                            </div>
+                        </div>
+                    </>
+                ) : (
+                        null
+                    )}
+
                 <div key={this.props.id} className='schedule-item'>
                     {this.props.animalType}
                 </div>
@@ -70,10 +96,11 @@ export default class DisplayOneDay extends Component {
                     {moment(this.props.statusChangeDate).format('l')}
                 </div>
                 <div className='schedule-item'>
-                    <FaInfoCircle className='fa-icon-left' />
+                    <FaInfoCircle className='fa-icon-left'
+                        onClick={this.toggleInfoModal} />
                     <FaTrashAlt className='fa-icon-left'
-                        onClick = {this.toggleCancelModal} />
-                        {/* // onClick = {e => this.props.cancelSchedule(this.props.id)} /> */}
+                        onClick={this.toggleCancelModal} />
+                    {/* // onClick = {e => this.props.cancelSchedule(this.props.id)} /> */}
                 </div>
             </>
         )

@@ -47,7 +47,7 @@
     font-size: 12pt;
 }
 
-.cancel-modal-view {
+.cancel-modal-view, .info-modal-view {
     background-color:#b3cbf7;
     position: absolute;
     left: 20rem;
@@ -60,6 +60,7 @@
     padding: 1.5em;
 }
 
+
 .close-cancel-modal{
     cursor: pointer;
     color: #071838;
@@ -71,4 +72,10 @@
     border: none;
     background: none;
     font-size: 1rem;
+}
+
+.animal-icon {
+    height: 50px;
+    width: 50px;
+    padding-top: 15px;
 }

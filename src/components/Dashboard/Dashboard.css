@@ -25,6 +25,18 @@
     margin-left: 1.5em;
 }
 
+.search-button-lrg {
+    font-size: 14pt;
+    font-weight: 400;
+    width: 7em;
+    background:#f88e37;
+    color: black;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px #00000033;
+    margin-bottom: 1em;
+    padding: 0.25em;
+}
+
 .search-results-container,  .search-results-title{
     width: 60%;
     display: grid;

@@ -75,7 +75,7 @@ export default class Schedule extends Component {
 
     addSchedule = async () => {
         // console.log("add schedule")
-        // console.log(this.state)
+        console.log(this.state)
         // console.log(moment().format('l, h:mm:ss a'))
         for (let i = 1; i <= this.state.slots; i++) {
             await axios.post("/schedule/addSchedule", {
@@ -84,7 +84,7 @@ export default class Schedule extends Component {
                 animalType: this.state.animalType,
                 custName: this.state.custName,
                 custPhone: this.state.custPhone,
-                schedStatus: 'Active',
+                schedStatus: 'Confirmed',
                 changeDate: moment().format('l,  h:mm:ss a'),
                 waitList: this.state.waitList,
                 notes: this.state.notes

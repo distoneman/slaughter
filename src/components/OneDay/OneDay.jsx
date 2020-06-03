@@ -3,31 +3,51 @@ import axios from 'axios';
 import moment from 'moment';
 import { FaChevronCircleRight, FaChevronCircleLeft } from 'react-icons/fa';
 
+import Schedule from '../Dashboard/Schedule';
 import DisplayOneDay from './DisplayOneDay';
 import './OneDay.css';
+import imageBeef from '../../images/cow.png';
+import imagePork from '../../images/pig.png';
+import imageSheep from '../../images/sheep.png'
 
 export default class OneDay extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            slotId: null,
             schedDate: '',
             animalType: '',
             daysSchedule: [],
-            cancelModal: false
+            cancelModal: false,
+            animalIcon: null
         }
 
     }
 
     async componentDidMount() {
-        console.log(this.props)
+        // console.log(this.props)
         let { id } = this.props.match.params;
         const res = await axios.get(`/schedule/get_one_day/${id}`)
         this.setState({
+            slotId: id,
             schedDate: res.data[0].sched_date,
             animalType: res.data[0].animal_type,
             daysSchedule: res.data
         })
-        console.log(this.state)
+        if(this.state.animalType === 'Beef'){
+            this.setState({
+                animalIcon: imageBeef
+            })
+        } else if(this.state.animalType === 'Pork') {
+            this.setState({
+                animalIcon: imagePork
+            })
+        } else {
+            this.setState ({
+                animalIcon: imageSheep
+            })
+        }
+        // console.log(this.state)
     }
 
     getScheduleByDate = async (direction) => {
@@ -73,12 +93,6 @@ export default class OneDay extends Component {
         }
     }
 
-    // toggleCancelModal = async () => {
-    //     await this.setState({
-    //         cancelModal: !this.state.cancelModal,
-    //         cancelledBy: ''
-    //     })
-    // }
 
     cancelSchedule = async (id, cancelledBy) => {
         console.log('cancel schedule')
@@ -94,7 +108,17 @@ export default class OneDay extends Component {
         this.setState({
             daysSchedule: res.data
         })
-        
+
+    }
+
+    toggleSchedule = async () => {
+        console.log('toggle schedule modal')
+        await this.setState({
+            scheduleModal: !this.state.scheduleModal
+        })
+        // if (this.state.scheduleModal === false) {
+        //     this.props.getDailyDetail();
+        // }
     }
 
     async handleChange(key, value) {
@@ -105,7 +129,6 @@ export default class OneDay extends Component {
         // })
         // console.log(this.state)
     }
-
 
 
     render() {
@@ -136,10 +159,28 @@ export default class OneDay extends Component {
         })
         return (
             <>
+                {this.state.scheduleModal ? (
+                    <div className="schedule-view">
+                        <button className='close-schedule-modal' onClick={this.toggleSchedule}>X</button>
+                        <Schedule
+                            //  searchType={this.props.searchType}
+                            id={this.state.slotId}
+                            toggleSchedule={this.toggleSchedule}
+                            scheduleDate={this.state.schedDate}
+                        />
+                    </div>
+                ) : (
+                        null
+                    )}
+
+
                 <div className='header'>
                     <div className='header-content'>
                         <FaChevronCircleLeft className='btn-arrows'
                             onClick={e => this.getScheduleByDate("subtract")} />
+                    </div>
+                    <div>
+                        <img src={this.state.animalIcon} alt="Beef Icon" className="animal-icon" />
                     </div>
                     <div className='header-content'>
                         {moment(this.state.schedDate).utc().format('dddd, MMMM Do YYYY')}
@@ -151,6 +192,15 @@ export default class OneDay extends Component {
                 </div>
                 <hr />
                 <div className='schedule-title-row'>
+                    <div>
+                        <button className='search-button-lrg'
+                            onClick={this.toggleSchedule}>Schedule</button>
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                     <div className='schedule-title-item'>Animal Type</div>
                     <div className='schedule-title-item'>Name</div>
                     <div className='schedule-title-item'>Phone</div>
