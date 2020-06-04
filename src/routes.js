@@ -10,6 +10,6 @@ export default (
             <Route exact path='/' component={Dashboard} />
             <Route exact path='/settings' component={Settings} />
             <Route exact path='/oneday/:id' component={OneDay} />
-            <Route exact path='/search/' component={SearchCustomer} />
+            <Route exact path='/search' component={SearchCustomer} />
         </Switch>
 )

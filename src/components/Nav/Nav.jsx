@@ -6,6 +6,8 @@ import './Nav.css';
 
 export default class Nav extends Component {
 
+
+
     render() {
         return (
             <div className='nav-bar'>
@@ -16,8 +18,10 @@ export default class Nav extends Component {
                         </Link>
                 </div>
                 <div className='nav-search-container'>
-                        <input className='nav-search-input'/>
-                        <FaSearch className='nav-search-icon'/>
+                        <Link to={`/search`}
+                            className='nav-link'>
+                            <FaSearch className='nav-search-icon'/>
+                        </Link>    
                         <Link to="/settings" className='nav-link'>
                             <FaCog className='nav-settings-icon'/>
                         </Link>

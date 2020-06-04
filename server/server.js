@@ -4,6 +4,7 @@ const massive = require('massive');
 require('dotenv').config();
 const settingsCtrl = require('./settingsController');
 const scheduleCtrl = require('./scheduleController');
+const searchCtrl = require('./searchController');
 
 const { SERVER_PORT, CONNECTION_STRING } = process.env;
 
@@ -32,3 +33,6 @@ app.post('/schedule/addSchedule', scheduleCtrl.addSchedule);
 app.get('/schedule/get_one_day/:id', scheduleCtrl.getOneDay);
 app.get('/schedule/getScheduleByDate/', scheduleCtrl.getScheduleByDate);
 app.put('/schedule/cancel', scheduleCtrl.cancelSched);
+
+// SEARCH
+app.get('/search/by_name/:name', searchCtrl.getCustomerByName);

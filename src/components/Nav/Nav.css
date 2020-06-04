@@ -27,14 +27,7 @@
 }
 
 .nav-settings-icon{
-    margin-left: 3.5em;
+    margin-left: 1em;
+    color: white;
 }
 
-.nav-search-input {
-    font-size: 12pt;
-    padding: 4px 7px;
-    margin: 3px 10px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    width: 20em;
-}
