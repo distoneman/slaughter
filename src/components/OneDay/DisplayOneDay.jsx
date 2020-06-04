@@ -17,7 +17,7 @@ export default class DisplayOneDay extends Component {
     }
 
     toggleCancelModal = async () => {
-        await this.setState({
+        this.setState({
             cancelModal: !this.state.cancelModal,
             cancelledBy: ''
         })

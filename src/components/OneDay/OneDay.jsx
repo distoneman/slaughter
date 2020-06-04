@@ -27,189 +27,204 @@ export default class OneDay extends Component {
     async componentDidMount() {
         // console.log(this.props)
         let { id } = this.props.match.params;
-        const res = await axios.get(`/schedule/get_one_day/${id}`)
         this.setState({
-            slotId: id,
-            schedDate: res.data[0].sched_date,
-            animalType: res.data[0].animal_type,
-            daysSchedule: res.data
+            slotId: id
         })
-        if(this.state.animalType === 'Beef'){
+        await this.getScheduleById(id)
+        // const res = await axios.get(`/schedule/get_one_day/${id}`)
+        // this.setState({
+        //     slotId: id,
+        //     schedDate: res.data[0].sched_date,
+        //     animalType: res.data[0].animal_type,
+        //     daysSchedule: res.data
+        // })
+        if (this.state.animalType === 'Beef') {
             this.setState({
                 animalIcon: imageBeef
             })
-        } else if(this.state.animalType === 'Pork') {
+        } else if (this.state.animalType === 'Pork') {
             this.setState({
                 animalIcon: imagePork
             })
         } else {
-            this.setState ({
+            this.setState({
                 animalIcon: imageSheep
             })
         }
         // console.log(this.state)
     }
 
-    getScheduleByDate = async (direction) => {
-        console.log(direction)
-        var date = new Date(this.state.schedDate)
-        console.log(date)
-        let dow = date.getDay()
-        console.log(dow)
-        if (direction === 'add') {
-            switch (dow) {
-                case 5:
-                    var searchDate = moment(this.state.schedDate).add(3, 'd').format('l')
-                    break;
-                default:
-                    searchDate = moment(this.state.schedDate).add(1, 'd').format('l')
-            }
-        } else {
-            switch (dow) {
-                case 1:
-                    searchDate = moment(this.state.schedDate).subtract(3, 'd').format('l')
-                    break;
-                default:
-                    searchDate = moment(this.state.schedDate).subtract(1, 'd').format('l')
-            }
-        }
-        const res = await axios.get(`/schedule/getScheduleByDate/?schedDate=${searchDate}&animalType=${this.state.animalType}`)
-        console.log(res.data)
-        if (res.data.length === 0) {
-            alert("nobody scheduled")
-            this.setState({
-                schedDate: searchDate,
-                // res.data[0].sched_date,
-                // animalType: res.data[0].animal_type,
-                daysSchedule: []
-            })
+    getScheduleById = async(id) => {
+    const res = await axios.get(`/schedule/get_one_day/${id}`)
+    this.setState({
+        slotId: id,
+        schedDate: res.data[0].sched_date,
+        animalType: res.data[0].animal_type,
+        daysSchedule: res.data
+    })
 
-        } else {
-            this.setState({
-                schedDate: res.data[0].sched_date,
-                animalType: res.data[0].animal_type,
-                daysSchedule: res.data
-            })
+}
+
+getScheduleByDate = async (direction) => {
+    console.log(direction)
+    var date = new Date(this.state.schedDate)
+    console.log(date)
+    let dow = date.getDay()
+    console.log(dow)
+    if (direction === 'add') {
+        switch (dow) {
+            case 5:
+                var searchDate = moment(this.state.schedDate).add(3, 'd').format('l')
+                break;
+            default:
+                searchDate = moment(this.state.schedDate).add(1, 'd').format('l')
+        }
+    } else {
+        switch (dow) {
+            case 1:
+                searchDate = moment(this.state.schedDate).subtract(3, 'd').format('l')
+                break;
+            default:
+                searchDate = moment(this.state.schedDate).subtract(1, 'd').format('l')
         }
     }
-
-
-    cancelSchedule = async (id, cancelledBy) => {
-        console.log('cancel schedule')
-        console.log(id)
-        console.log(cancelledBy)
-        let schedDate = this.state.schedDate
-        let animalType = this.state.animalType
-        let statusDate = moment(new Date()).format('l')
-        console.log(statusDate)
-        const res = await axios.put(`/schedule/cancel`,
-            { id, schedDate, animalType, statusDate, cancelledBy })
-        console.log(res.data)
+    const res = await axios.get(`/schedule/getScheduleByDate/?schedDate=${searchDate}&animalType=${this.state.animalType}`)
+    console.log(res.data)
+    if (res.data.length === 0) {
+        alert("nobody scheduled")
         this.setState({
+            schedDate: searchDate,
+            // res.data[0].sched_date,
+            // animalType: res.data[0].animal_type,
+            daysSchedule: []
+        })
+
+    } else {
+        this.setState({
+            schedDate: res.data[0].sched_date,
+            animalType: res.data[0].animal_type,
             daysSchedule: res.data
         })
-
     }
+}
 
-    toggleSchedule = async () => {
-        console.log('toggle schedule modal')
-        await this.setState({
-            scheduleModal: !this.state.scheduleModal
-        })
-        // if (this.state.scheduleModal === false) {
-        //     this.props.getDailyDetail();
-        // }
+
+cancelSchedule = async (id, cancelledBy) => {
+    console.log('cancel schedule')
+    console.log(id)
+    console.log(cancelledBy)
+    let schedDate = this.state.schedDate
+    let animalType = this.state.animalType
+    let statusDate = moment(new Date()).format('l')
+    console.log(statusDate)
+    const res = await axios.put(`/schedule/cancel`,
+        { id, schedDate, animalType, statusDate, cancelledBy })
+    console.log(res.data)
+    this.setState({
+        daysSchedule: res.data
+    })
+
+}
+
+toggleSchedule = async () => {
+    console.log('toggle schedule modal')
+    await this.setState({
+        scheduleModal: !this.state.scheduleModal
+    })
+    if (this.state.scheduleModal === false) {
+        this.getScheduleById(this.state.slotId);
     }
+}
 
-    async handleChange(key, value) {
-        // console.log(key)
-        // console.log(value.target.value)
-        // this.setState({
-        //     [key]: value.target.value
-        // })
-        // console.log(this.state)
-    }
+async handleChange(key, value) {
+    // console.log(key)
+    // console.log(value.target.value)
+    // this.setState({
+    //     [key]: value.target.value
+    // })
+    // console.log(this.state)
+}
 
 
-    render() {
-        let displayOneDaySchedule = this.state.daysSchedule.map(slot => {
-            return (
-                <DisplayOneDay
-                    key={slot.sched_id}
-                    id={slot.sched_id}
-                    schedDate={slot.sched_date}
-                    animalType={slot.animal_type}
-                    custName={slot.cust_name}
-                    custPhone={slot.cust_phone}
-                    schedStatus={slot.sched_status}
-                    statusChangeDate={slot.status_change_date}
-                    cancelledBy={slot.cancelled_by}
-                    waitlistFlag={slot.waitlist_flag}
-                    notes={slot.notes}
-                    cancelSchedule={this.cancelSchedule}
-                    toggleCancelModal={this.toggleCancelModal}
-                />
-                // <>
-                //     <div>
-                //         {slot.cust_name}
-                //     </div>
-                //     <div>{slot.cust_phone}</div>
-                // </DisplayOneDay>
-            )
-        })
+render() {
+    let displayOneDaySchedule = this.state.daysSchedule.map(slot => {
         return (
-            <>
-                {this.state.scheduleModal ? (
-                    <div className="schedule-view">
-                        <button className='close-schedule-modal' onClick={this.toggleSchedule}>X</button>
-                        <Schedule
-                            //  searchType={this.props.searchType}
-                            id={this.state.slotId}
-                            toggleSchedule={this.toggleSchedule}
-                            scheduleDate={this.state.schedDate}
-                        />
-                    </div>
-                ) : (
-                        null
-                    )}
-
-
-                <div className='header'>
-                    <div className='header-content'>
-                        <FaChevronCircleLeft className='btn-arrows'
-                            onClick={e => this.getScheduleByDate("subtract")} />
-                    </div>
-                    <div>
-                        <img src={this.state.animalIcon} alt="Beef Icon" className="animal-icon" />
-                    </div>
-                    <div className='header-content'>
-                        {moment(this.state.schedDate).utc().format('dddd, MMMM Do YYYY')}
-                    </div>
-                    <div className='header-content'>
-                        <FaChevronCircleRight className='btn-arrows'
-                            onClick={e => this.getScheduleByDate("add")} />
-                    </div>
-                </div>
-                <hr />
-                <div className='schedule-title-row'>
-                    <div>
-                        <button className='search-button-lrg'
-                            onClick={this.toggleSchedule}>Schedule</button>
-                    </div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div className='schedule-title-item'>Animal Type</div>
-                    <div className='schedule-title-item'>Name</div>
-                    <div className='schedule-title-item'>Phone</div>
-                    <div className='schedule-title-item'>Status</div>
-                    <div className='schedule-title-item'>Status Date</div>
-                    <div className='schedule-title-item'></div>
-                    {displayOneDaySchedule}
-                </div>
-            </>
+            <DisplayOneDay
+                key={slot.sched_id}
+                id={slot.sched_id}
+                schedDate={slot.sched_date}
+                animalType={slot.animal_type}
+                custName={slot.cust_name}
+                custPhone={slot.cust_phone}
+                schedStatus={slot.sched_status}
+                statusChangeDate={slot.status_change_date}
+                cancelledBy={slot.cancelled_by}
+                waitlistFlag={slot.waitlist_flag}
+                notes={slot.notes}
+                cancelSchedule={this.cancelSchedule}
+                toggleCancelModal={this.toggleCancelModal}
+            />
+            // <>
+            //     <div>
+            //         {slot.cust_name}
+            //     </div>
+            //     <div>{slot.cust_phone}</div>
+            // </DisplayOneDay>
         )
-    }
+    })
+    return (
+        <>
+            {this.state.scheduleModal ? (
+                <div className="schedule-view">
+                    <button className='close-schedule-modal' onClick={this.toggleSchedule}>X</button>
+                    <Schedule
+                        //  searchType={this.props.searchType}
+                        id={this.state.slotId}
+                        toggleSchedule={this.toggleSchedule}
+                        scheduleDate={this.state.schedDate}
+                    />
+                </div>
+            ) : (
+                    null
+                )}
+
+
+            <div className='header'>
+                <div className='header-content'>
+                    <FaChevronCircleLeft className='btn-arrows'
+                        onClick={e => this.getScheduleByDate("subtract")} />
+                </div>
+                <div>
+                    <img src={this.state.animalIcon} alt="Beef Icon" className="animal-icon" />
+                </div>
+                <div className='header-content'>
+                    {moment(this.state.schedDate).utc().format('dddd, MMMM Do YYYY')}
+                </div>
+                <div className='header-content'>
+                    <FaChevronCircleRight className='btn-arrows'
+                        onClick={e => this.getScheduleByDate("add")} />
+                </div>
+            </div>
+            <hr />
+            <div className='schedule-title-row'>
+                <div>
+                    <button className='search-button-lrg'
+                        onClick={this.toggleSchedule}>Schedule</button>
+                </div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div className='schedule-title-item'>Animal Type</div>
+                <div className='schedule-title-item'>Name</div>
+                <div className='schedule-title-item'>Phone</div>
+                <div className='schedule-title-item'>Status</div>
+                <div className='schedule-title-item'>Status Date</div>
+                <div className='schedule-title-item'></div>
+                {displayOneDaySchedule}
+            </div>
+        </>
+    )
+}
 }
