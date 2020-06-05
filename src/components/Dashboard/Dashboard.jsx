@@ -109,6 +109,7 @@ export default class Dashboard extends Component {
         else {
             displayDays = this.state.dailyDetail.map(day => {
                 let fDate =( moment(day.slot_date).format('MM/D, dddd'))
+                var availableSlots = day.max_slots - day.used_slots
                 return (
                     <DisplayDays
                         key={day.id}
@@ -118,6 +119,7 @@ export default class Dashboard extends Component {
                         slot_date = {day.slot_date}
                         animal_type = {day.animal_type}
                         used_slots = {day.used_slots}
+                        available_slots = {availableSlots}
                         max_slots = {day.max_slots}
                         getDailyDetail = {this.getDailyDetail}
                     />
@@ -173,7 +175,7 @@ export default class Dashboard extends Component {
                 <div className='search-results-title'>
                     <div className='search-results-item-title'>Date</div>
                     <div className='search-results-item-title'>Animal</div>
-                    <div className='search-results-item-title'>Used Slots</div>
+                    <div className='search-results-item-title'>Available Slots</div>
                     <div className='search-results-item-title'></div>
                     {displayDays}
                 </div>

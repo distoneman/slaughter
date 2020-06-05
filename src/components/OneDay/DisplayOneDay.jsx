@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 // import axios from 'axios';
-import { FaTrashAlt, FaInfoCircle } from 'react-icons/fa'
+import { FaTrashAlt, FaInfoCircle, FaExchangeAlt } from 'react-icons/fa'
 
 import './OneDay.css';
 // import axios from 'axios';
@@ -100,7 +100,7 @@ export default class DisplayOneDay extends Component {
                         onClick={this.toggleInfoModal} />
                     <FaTrashAlt className='fa-icon-left'
                         onClick={this.toggleCancelModal} />
-                    {/* // onClick = {e => this.props.cancelSchedule(this.props.id)} /> */}
+                    <FaExchangeAlt className='fa-icon-left' />
                 </div>
             </>
         )

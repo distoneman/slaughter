@@ -3,4 +3,4 @@ SELECT * FROM k_schedule
         AND (cust_name LIKE $(name) 
         AND (sched_status != 'Replaced')
         OR UPPER(cust_name) LIKE UPPER($(name)))
-    ORDER BY sched_date;
+    ORDER BY sched_date, cust_name;

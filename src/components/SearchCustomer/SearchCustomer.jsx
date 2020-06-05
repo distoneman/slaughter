@@ -35,11 +35,17 @@ export default class SearchCustomer extends Component {
         this.setState({
             searchResults: res.data
         })
-        // console.log(this.state)
+        console.log(this.state)
     }
 
     render() {
         let displayCustomers = this.state.searchResults.map(cust => {
+            console.log(cust.waitlist_flag)
+            if(cust.waitlist_flag === true){
+                var waitList = 'Yes'
+            } else {
+                waitList = 'No'
+            }
             return (
                 <DisplayCustomers
                     key={cust.sched_id}
@@ -50,7 +56,7 @@ export default class SearchCustomer extends Component {
                     schedStatus={cust.sched_status}
                     statusDate={cust.status_change_date}
                     cancelledBy={cust.cancelled_by}
-                    waitList={cust.waitlist_flag}
+                    waitList={waitList}
                     notes={cust.notes}
                 />
             )
@@ -65,7 +71,15 @@ export default class SearchCustomer extends Component {
                         onClick={() => this.getCustomerByName()}>Search</button>
                 </div>
                 <hr />
+                <div className='cust-results-container'>
+                    <div className='cust-results-item-title'>Customer Name</div>
+                    <div className='cust-results-item-title'>Animal</div>
+                    <div className='cust-results-item-title'>Date Scheduled</div>
+                    <div className='cust-results-item-title'>Status</div>
+                    <div className='cust-results-item-title'>Status Date</div>
+                    <div className='cust-results-item-title'>On Waitlist</div>
                 {displayCustomers}
+                </div>
             </div>
         )
     }

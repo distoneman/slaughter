@@ -3,3 +3,26 @@
     margin-top: 1.25em;
     margin-bottom: 1.25em;
 }
+
+.cust-results-item-title {
+    border: solid 1px #474545;
+    background: lightgrey;
+    padding: .25em;
+    font-size: 10pt;
+    font-weight: 700;
+}
+
+.cust-results-container {
+    width: 80%;
+    display: grid;
+    z-index: 1;
+    /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
+    grid-template-columns: 2fr .8fr .8fr .8fr .8fr .5fr;
+    margin-left: 3em;
+}
+
+.search-item {
+    border: solid 1px #474545;
+    padding: .4em;
+    font-size: 11pt;
+}

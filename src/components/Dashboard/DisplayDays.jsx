@@ -53,7 +53,7 @@ export default class DisplayDays extends Component {
                 </Link>
                 </div>
                 <div className='search-item'>{this.props.animal_type}</div>
-                <div className='search-item'>{this.props.used_slots}/{this.props.max_slots}
+                <div className='search-item'>{this.props.available_slots} / {this.props.max_slots}
                     <FaCalendarPlus className='fa-icon' onClick={this.toggleSchedule} />
                 </div>
                 <div className='search-item'>Edit Slots</div>
