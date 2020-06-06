@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use( express.static( `${__dirname}/../build` ) )
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
 
 massive(CONNECTION_STRING).then(connection => {
     app.set('db', connection)

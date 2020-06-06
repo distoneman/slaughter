@@ -69,7 +69,7 @@
     float: right;
 }
 
-.schedule-view {
+.schedule-view, .edit-slots-view {
     background-color:#b3cbf7;
     position: absolute;
     left: 10rem;
@@ -82,7 +82,7 @@
     padding: 1.5em;
 }
 
-.close-schedule-modal{
+.close-schedule-modal, .close-edit-slots-modal {
     cursor: pointer;
     color: #071838;
     transition: color .2s;

@@ -28,6 +28,10 @@ export default class Dashboard extends Component {
         // console.log(this.state)
     }
 
+    // toggleEditSlots = async () => {
+    //     console.log('toggle edit slots')
+    // }
+
     getDailyDetail = async () => {
         this.setState({
             dailyDetail: []
@@ -122,6 +126,7 @@ export default class Dashboard extends Component {
                         available_slots = {availableSlots}
                         max_slots = {day.max_slots}
                         getDailyDetail = {this.getDailyDetail}
+                        // toggleSlotsModal = {this.toggleEditSlots}
                     />
 
                 )

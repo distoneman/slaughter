@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
 // import { IoIosMail, IoIosText } from "react-icons/io";
-import { FaCalendarPlus, FaClipboardList } from 'react-icons/fa';
+import { FaCalendarPlus, FaClipboardList, FaEdit } from 'react-icons/fa';
 import Schedule from './Schedule';
 import moment from 'moment';
 import { Link } from "react-router-dom";
@@ -13,7 +13,8 @@ export default class DisplayDays extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            scheduleModal: false
+            scheduleModal: false,
+            editSlotsModal: false
         }
 
     }
@@ -25,6 +26,13 @@ export default class DisplayDays extends Component {
         if (this.state.scheduleModal === false) {
             this.props.getDailyDetail();
         }
+    }
+
+    toggleEditSlots = async () => {
+        console.log('toggle edit slots')
+        this.setState({
+            editSlotsModal: !this.state.editSlotsModal
+        })
     }
 
 
@@ -47,6 +55,16 @@ export default class DisplayDays extends Component {
                         null
                     )}
 
+                {this.state.editSlotsModal ? (
+                    <div className="edit-slots-view">
+                        <button className='close-edit-slots-modal' onClick={this.toggleEditSlots}>X</button>
+                        <div>hello</div>
+                    </div>
+                ) : (
+                    null
+                )
+                }    
+
                 <div className='search-item' key={this.props.id}>{moment(this.props.slot_date).utc().format('dddd, MMM Do YYYY')}
                 <Link to={`/oneday/${this.props.id}`}>
                     <FaClipboardList className='fa-icon' />
@@ -56,7 +74,9 @@ export default class DisplayDays extends Component {
                 <div className='search-item'>{this.props.available_slots} / {this.props.max_slots}
                     <FaCalendarPlus className='fa-icon' onClick={this.toggleSchedule} />
                 </div>
-                <div className='search-item'>Edit Slots</div>
+                <div className='search-item'>Edit Slots
+                    <FaEdit className='fa-icon' onClick={this.toggleEditSlots }/>
+                </div>
             </>
         )
     }

@@ -127,7 +127,7 @@ cancelSchedule = async (id, cancelledBy) => {
 }
 
 toggleSchedule = async () => {
-    console.log('toggle schedule modal')
+    // console.log('toggle schedule modal')
     await this.setState({
         scheduleModal: !this.state.scheduleModal
     })
