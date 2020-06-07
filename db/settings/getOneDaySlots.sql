@@ -1,0 +1,1 @@
+select * from k_slots where slot_date = $(schedDate);

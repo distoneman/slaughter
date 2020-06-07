@@ -26,8 +26,13 @@
     vertical-align: middle;
 }
 
-.nav-settings-icon{
-    margin-left: 1em;
+.nav-settings-icon {
+    /* margin-left: 1em; */
     color: white;
+}
+
+.nav-list-icon, .nav-search-icon, .nav-settings-icon {
+    color: white;
+    margin-right: 1em;
 }
 

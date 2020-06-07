@@ -107,7 +107,7 @@ export default class Schedule extends Component {
             <div>
                 {this.state.available ? (
                     <>
-                        <div className='available-msg'>
+                        <div className='modal-title'>
                             {this.state.numSlotsAvailable} available slots for {moment(this.state.schedDate).utc().format("dddd, MMM Do YYYY")}
                         </div>
                         <hr />

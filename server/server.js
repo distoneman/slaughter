@@ -26,6 +26,8 @@ app.get('/settings/years/:animalType', settingsCtrl.years);
 app.get('/settings/get_daily/:animalType&:year&:month', settingsCtrl.getDailyDetail)
 app.get('/settings/getDefault/:animalType&:month', settingsCtrl.getMonthlyDefault)
 app.post('/settings/addSlots' , settingsCtrl.addSlots);
+app.get('/settings/get_day_slots/', settingsCtrl.getOneDaySlots);
+app.put('/settings/update_slots', settingsCtrl.updateSlots);
 
 // SCHEDULE
 app.get('/schedule/available_slots/:id', scheduleCtrl.getAvailable);

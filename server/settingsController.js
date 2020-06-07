@@ -40,5 +40,25 @@ module.exports = {
             slot_date, animal_type, max_slots
         })
         res.status(200).send(response)
+    },
+    getOneDaySlots: async (req, res) => {
+        // console.log('get one day slots')
+        // console.log(req.query)
+        const schedDate = req.query.schedDate;
+        const db = req.app.get('db')
+        let response = await db.settings.getOneDaySlots({
+            schedDate
+        })
+        res.status(200).send(response)
+    },
+    updateSlots: async (req, res) => {
+        console.log('update slots')
+        const { beefId, beefMax, porkId, porkMax,
+            sheepId, sheepMax } = req.body;
+        const db = req.app.get('db')
+        let response = await db.settings.updateSlots({
+            beefId, beefMax, porkId, porkMax, sheepId, sheepMax
+        })
+        res.status(200).send(response)
     }
 }

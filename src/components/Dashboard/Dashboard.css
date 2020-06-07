@@ -25,6 +25,19 @@
     margin-left: 1.5em;
 }
 
+.slots-save-button {
+    font-size: 14pt;
+    font-weight: 400;
+    width: 5em;
+    background:#f88e37;
+    color: black;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px #00000033;
+    margin-left: 3.5em;
+    margin-top: .5em;
+}
+
+
 .search-button-lrg {
     font-size: 14pt;
     font-weight: 400;
@@ -95,7 +108,7 @@
     font-size: 1rem;
 }
 
-.available-msg {
+.modal-title {
     font-size: 2em;
     color: #071838;
 }
@@ -134,6 +147,15 @@
     width: 20em;
 }
 
+.form-user-input-short {
+    font-size: 12pt;
+    padding: 4px 7px;
+    margin: 4px 4px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 7em;
+}
+
 .form-checkbox {
     width: 20px;
     height: 20px;
@@ -142,4 +164,39 @@
     box-sizing: border-box;
     border-radius: 5px;
 
+}
+
+.edit-slots-table {
+    width: 70%;
+    margin-left: 2em;
+    display: grid;
+    z-index: 1;
+    /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
+    grid-template-columns: 1fr .7fr .6fr;
+}
+
+.edit-slots-title {
+    border: solid 1px #474545;
+    padding: .4em;
+    padding-left: .6em;
+    font-size: 11pt;
+    font-weight: bold;
+    background-color: #d6d3d3;
+    text-align: center;
+}
+
+.edit-slots-item {
+    border: solid 1px #474545;
+    padding: 0;
+    padding-left: .0;
+    font-size: 14pt;
+    text-align: left;
+}
+
+.edit-slots-used {
+    border: solid 1px #474545;
+    padding: .4em;
+    padding-left: .0;
+    font-size: 12pt;
+    text-align: center;
 }
