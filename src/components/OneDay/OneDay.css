@@ -60,6 +60,18 @@
     padding: 1.5em;
 }
 
+.waitlist-modal-view {
+    background-color:#b3cbf7;
+    position: absolute;
+    left: 4rem;
+    z-index: 1;
+    /* height: 18rem; */
+    width: 60rem;
+    border-radius: 10px;
+    border: solid 2px #071838;
+    box-shadow: 5px 5px 5px #071838;
+    padding: 1.5em;
+}
 
 .close-cancel-modal{
     cursor: pointer;
@@ -78,4 +90,27 @@
     height: 50px;
     width: 50px;
     padding-top: 15px;
+}
+
+.waitlist-title-row{
+    width: 80%;
+    display: grid;
+    z-index: 1;
+    /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
+    grid-template-columns: .8fr 1.2fr 1fr .4fr;
+    margin-left: 3em;
+}
+
+.waitlist-title-item {
+    border: solid 1px #474545;
+    background: lightgrey;
+    padding: .25em;
+    font-size: 10pt;
+    font-weight: 700;
+}
+
+.waitlist-item {
+    border: solid 1px #474545;
+    padding: .4em;
+    font-size: 11pt;
 }

@@ -3,7 +3,9 @@ import moment from 'moment';
 // import axios from 'axios';
 import { FaTrashAlt, FaInfoCircle, FaExchangeAlt } from 'react-icons/fa'
 
+import DisplayWaitlist from './DisplayWaitlist';
 import './OneDay.css';
+import axios from 'axios';
 // import axios from 'axios';
 
 export default class DisplayOneDay extends Component {
@@ -12,7 +14,9 @@ export default class DisplayOneDay extends Component {
         this.state = {
             cancelModal: false,
             cancelledBy: '',
-            infoModal: false
+            infoModal: false,
+            waitlistModal: false,
+            waitList: [],
         }
     }
 
@@ -25,10 +29,40 @@ export default class DisplayOneDay extends Component {
 
     toggleInfoModal = async () => {
         console.log("info modal")
-        await this.setState({
+        this.setState({
             infoModal: !this.state.infoModal
         })
         console.log(this.state.infoModal)
+    }
+
+    toggleWaitlistModal = async () => {
+        console.log("waitlist modal")
+        // console.log(this.props.id)
+        // console.log(this.props.schedStatus)
+        if (this.props.schedStatus === 'Cancelled') {
+            await this.setState({
+                waitlistModal: !this.state.waitlistModal
+            })
+        } else {
+            alert('You must cancel first')
+        }
+        if (this.state.waitlistModal === true) {
+            await this.getWaitlist();
+        } else {
+            this.props.getScheduleById(this.props.slotId)
+        }
+        // console.log(this.state.waitlistModal)
+    }
+
+    getWaitlist = async () => {
+        console.log('get waitlist')
+        // console.log(this.props)
+        const res = await axios.get(`/schedule/get_waitlist/?schedDate=${this.props.schedDate}&animalType=${this.props.animalType}`)
+        // console.log(res.data)
+        this.setState({
+            waitList: res.data
+        })
+        console.log(this.state)
     }
 
 
@@ -47,6 +81,25 @@ export default class DisplayOneDay extends Component {
     }
 
     render() {
+        let displayWaitlist = this.state.waitList.map(cust => {
+            return (
+                <DisplayWaitlist
+                    key={cust.sched_id}
+                    id={cust.sched_id}
+                    slotId={cust.k_slots_id}
+                    replaceId={this.props.id}
+                    replaceDate={this.props.schedDate}
+                    replaceSlotId={this.props.slotId}
+                    animalType={cust.animal_type}
+                    schedDate={cust.sched_date}
+                    custName={cust.cust_name}
+                    custPhone={cust.cust_phone}
+                    notes={cust.notes}
+                    toggleWaitlistModal={this.toggleWaitlistModal}
+                />
+            )
+        })
+
         return (
             <>
                 {this.state.cancelModal ? (
@@ -80,6 +133,25 @@ export default class DisplayOneDay extends Component {
                         null
                     )}
 
+                {this.state.waitlistModal ? (
+                    <>
+                        <div className='waitlist-modal-view'>
+                            <div className='modal-title'>{`${this.props.animalType} Waitlist`}</div>
+                            <hr/>
+                            <button className='close-cancel-modal' onClick={this.toggleWaitlistModal}>X</button>
+                            <div className='waitlist-title-row'>
+                                <div className='waitlist-title-item'>Date Scheduled</div>
+                                <div className='waitlist-title-item'>Customer Name</div>
+                                <div className='waitlist-title-item'>Customer Phone</div>
+                                <div></div>
+                                {displayWaitlist}
+                            </div>
+                        </div>
+                    </>
+                ) : (
+                        null
+                    )}
+
                 <div key={this.props.id} className='schedule-item'>
                     {this.props.animalType}
                 </div>
@@ -100,7 +172,8 @@ export default class DisplayOneDay extends Component {
                         onClick={this.toggleInfoModal} />
                     <FaTrashAlt className='fa-icon-left'
                         onClick={this.toggleCancelModal} />
-                    <FaExchangeAlt className='fa-icon-left' />
+                    <FaExchangeAlt className='fa-icon-left'
+                        onClick={this.toggleWaitlistModal} />
                 </div>
             </>
         )

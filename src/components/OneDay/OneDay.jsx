@@ -31,13 +31,6 @@ export default class OneDay extends Component {
             slotId: id
         })
         await this.getScheduleById(id)
-        // const res = await axios.get(`/schedule/get_one_day/${id}`)
-        // this.setState({
-        //     slotId: id,
-        //     schedDate: res.data[0].sched_date,
-        //     animalType: res.data[0].animal_type,
-        //     daysSchedule: res.data
-        // })
         if (this.state.animalType === 'Beef') {
             this.setState({
                 animalIcon: imageBeef
@@ -152,6 +145,7 @@ render() {
             <DisplayOneDay
                 key={slot.sched_id}
                 id={slot.sched_id}
+                slotId={slot.k_slots_id}
                 schedDate={slot.sched_date}
                 animalType={slot.animal_type}
                 custName={slot.cust_name}
@@ -163,13 +157,8 @@ render() {
                 notes={slot.notes}
                 cancelSchedule={this.cancelSchedule}
                 toggleCancelModal={this.toggleCancelModal}
+                getScheduleById={this.getScheduleById}
             />
-            // <>
-            //     <div>
-            //         {slot.cust_name}
-            //     </div>
-            //     <div>{slot.cust_phone}</div>
-            // </DisplayOneDay>
         )
     })
     return (

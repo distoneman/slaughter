@@ -49,5 +49,30 @@ module.exports = {
             id, schedDate, animalType, statusDate, cancelledBy
         })
         res.status(200).send(response)
+    },
+    getWaitlist: async (req, res) => {
+        let schedDate = req.query.schedDate;
+        let animalType = req.query.animalType;
+        // console.log(schedDate)
+        // console.log(animalType)
+        const db = req.app.get('db');
+        let response = await db.settings.getWaitlst({
+            schedDate, animalType
+        })
+        res.status(200).send(response)
+    },
+    fillFromWaitlist: async (req, res) => {
+        console.log('fill from waitlist')
+        const {slotId, schedDate, animalType, custName, custPhone,
+            notes, replaceId, schedId} = req.body
+        console.log(slotId)
+        console.log(replaceId)
+        console.log(schedDate)
+        const db = req.app.get('db')
+        let response =  await db.settings.fillFromWaitlist({
+            slotId, schedDate, animalType, custName, custPhone,
+            notes, replaceId, schedId
+        })
+        res.status(200).send(response)
     }
 }

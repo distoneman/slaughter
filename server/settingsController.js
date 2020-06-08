@@ -52,7 +52,6 @@ module.exports = {
         res.status(200).send(response)
     },
     updateSlots: async (req, res) => {
-        console.log('update slots')
         const { beefId, beefMax, porkId, porkMax,
             sheepId, sheepMax } = req.body;
         const db = req.app.get('db')
