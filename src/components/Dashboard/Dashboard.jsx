@@ -95,16 +95,6 @@ export default class Dashboard extends Component {
         })
     }
 
-    // toggleSchedule = async () => {
-    //     await this.setState({
-    //         scheduleModal: !this.state.scheduleModal
-    //     })
-    //     if (this.state.scheduleModal === false) {
-    //         this.getDailyDetail();
-    //     }
-    //     console.log(this.state.scheduleModal)
-    // }
-
 
     render() {
         if (this.state.dailyDetail.length === 0) {

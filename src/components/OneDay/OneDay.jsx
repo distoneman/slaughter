@@ -59,11 +59,11 @@ export default class OneDay extends Component {
 }
 
 getScheduleByDate = async (direction) => {
-    console.log(direction)
+    // console.log(direction)
     var date = new Date(this.state.schedDate)
-    console.log(date)
+    // console.log(date)
     let dow = date.getDay()
-    console.log(dow)
+    // console.log(dow)
     if (direction === 'add') {
         switch (dow) {
             case 5:
@@ -82,9 +82,9 @@ getScheduleByDate = async (direction) => {
         }
     }
     const res = await axios.get(`/schedule/getScheduleByDate/?schedDate=${searchDate}&animalType=${this.state.animalType}`)
-    console.log(res.data)
+    // console.log(res.data)
     if (res.data.length === 0) {
-        alert("nobody scheduled")
+        // alert("nobody scheduled")
         this.setState({
             schedDate: searchDate,
             // res.data[0].sched_date,
@@ -103,20 +103,30 @@ getScheduleByDate = async (direction) => {
 
 
 cancelSchedule = async (id, cancelledBy) => {
-    console.log('cancel schedule')
-    console.log(id)
-    console.log(cancelledBy)
+    // console.log('cancel schedule')
+    // console.log(id)
+    // console.log(cancelledBy)
     let schedDate = this.state.schedDate
     let animalType = this.state.animalType
     let statusDate = moment(new Date()).format('l')
-    console.log(statusDate)
+    // console.log(statusDate)
     const res = await axios.put(`/schedule/cancel`,
         { id, schedDate, animalType, statusDate, cancelledBy })
+    // console.log(res.data)
+    this.setState({
+        daysSchedule: res.data
+    })
+}
+
+confirmSchedule = async(id) => {
+    let schedDate = this.state.schedDate
+    let animalType = this.state.animalType
+    const res = await axios.put(`/schedule/confirm`,
+        {id, schedDate, animalType})
     console.log(res.data)
     this.setState({
         daysSchedule: res.data
     })
-
 }
 
 toggleSchedule = async () => {
@@ -158,6 +168,7 @@ render() {
                 cancelSchedule={this.cancelSchedule}
                 toggleCancelModal={this.toggleCancelModal}
                 getScheduleById={this.getScheduleById}
+                confirmSchedule={this.confirmSchedule}
             />
         )
     })

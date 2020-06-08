@@ -15,8 +15,8 @@ export default class DisplayWaitlist extends Component {
     // }
 
     fillFromWaitlist = async () => {
-        console.log('fill from waitlist')
-        console.log(this.props)
+        // console.log('fill from waitlist')
+        // console.log(this.props)
         await axios.post('/schedule/fill_from_waitlst', {
             schedId: this.props.id,
             schedDate: this.props.replaceDate,

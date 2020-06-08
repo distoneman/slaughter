@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 // import axios from 'axios';
-import { FaTrashAlt, FaInfoCircle, FaExchangeAlt } from 'react-icons/fa'
+import { FaTrashAlt, FaInfoCircle, FaExchangeAlt, FaCheckCircle } from 'react-icons/fa'
 
 import DisplayWaitlist from './DisplayWaitlist';
 import './OneDay.css';
@@ -28,7 +28,7 @@ export default class DisplayOneDay extends Component {
     }
 
     toggleInfoModal = async () => {
-        console.log("info modal")
+        // console.log("info modal")
         this.setState({
             infoModal: !this.state.infoModal
         })
@@ -36,7 +36,7 @@ export default class DisplayOneDay extends Component {
     }
 
     toggleWaitlistModal = async () => {
-        console.log("waitlist modal")
+        // console.log("waitlist modal")
         // console.log(this.props.id)
         // console.log(this.props.schedStatus)
         if (this.props.schedStatus === 'Cancelled') {
@@ -55,14 +55,12 @@ export default class DisplayOneDay extends Component {
     }
 
     getWaitlist = async () => {
-        console.log('get waitlist')
-        // console.log(this.props)
+        console.log(this.props.schedDate)
         const res = await axios.get(`/schedule/get_waitlist/?schedDate=${this.props.schedDate}&animalType=${this.props.animalType}`)
-        // console.log(res.data)
         this.setState({
             waitList: res.data
         })
-        console.log(this.state)
+        // console.log(this.state)
     }
 
 
@@ -78,6 +76,15 @@ export default class DisplayOneDay extends Component {
     cancel = async () => {
         await this.props.cancelSchedule(this.props.id, this.state.cancelledBy)
         await this.toggleCancelModal()
+    }
+
+    confirm = async () => {
+        console.log('confirm')
+        if(this.props.schedStatus === 'Scheduled'){
+            await this.props.confirmSchedule(this.props.id)
+        } else {
+            alert("You can only Confirm a Scheduled appointment")
+        }
     }
 
     render() {
@@ -137,7 +144,7 @@ export default class DisplayOneDay extends Component {
                     <>
                         <div className='waitlist-modal-view'>
                             <div className='modal-title'>{`${this.props.animalType} Waitlist`}</div>
-                            <hr/>
+                            <hr />
                             <button className='close-cancel-modal' onClick={this.toggleWaitlistModal}>X</button>
                             <div className='waitlist-title-row'>
                                 <div className='waitlist-title-item'>Date Scheduled</div>
@@ -163,6 +170,8 @@ export default class DisplayOneDay extends Component {
                 </div>
                 <div className='schedule-item'>
                     {this.props.schedStatus}
+                    <FaCheckCircle className='fa-icon'
+                        onClick={this.confirm} />
                 </div>
                 <div className='schedule-item'>
                     {moment(this.props.statusChangeDate).format('l')}

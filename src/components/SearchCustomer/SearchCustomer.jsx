@@ -35,12 +35,12 @@ export default class SearchCustomer extends Component {
         this.setState({
             searchResults: res.data
         })
-        console.log(this.state)
+        // console.log(this.state)
     }
 
     render() {
         let displayCustomers = this.state.searchResults.map(cust => {
-            console.log(cust.waitlist_flag)
+            // console.log(cust.waitlist_flag)
             if(cust.waitlist_flag === true){
                 var waitList = 'Yes'
             } else {

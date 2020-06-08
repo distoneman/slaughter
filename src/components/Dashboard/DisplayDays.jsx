@@ -39,7 +39,7 @@ export default class DisplayDays extends Component {
     }
 
     toggleEditSlots = async () => {
-        console.log('toggle edit slots')
+        // console.log('toggle edit slots')
         await this.setState({
             editSlotsModal: !this.state.editSlotsModal
         })
@@ -57,7 +57,7 @@ export default class DisplayDays extends Component {
     }
 
     updateSlots = async () => {
-        console.log('update slots')
+        // console.log('update slots')
         await axios.put(`/settings/update_slots`, {
             beefId: this.state.BeefId,
             beefMax: this.state.BeefMax,
@@ -71,7 +71,7 @@ export default class DisplayDays extends Component {
     }
 
     getOneDaySlots = async () => {
-        console.log('get one day slots')
+        // console.log('get one day slots')
         // console.log(this.props)
         let schedDate = moment(this.props.slot_date).format('l')
         // console.log(schedDate)
@@ -94,7 +94,7 @@ export default class DisplayDays extends Component {
                 [idKey]: this.state.slots[i].id
             })
         }
-        console.log(this.state)
+        // console.log(this.state)
     }
 
 
