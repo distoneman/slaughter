@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { FaExchangeAlt } from 'react-icons/fa'
 
-import './OneDay.css';
+import './../OneDay/OneDay.css'
+// import './OneDay.css';
 import axios from 'axios';
 
 export default class DisplayWaitlist extends Component {
@@ -17,21 +18,27 @@ export default class DisplayWaitlist extends Component {
     fillFromWaitlist = async () => {
         // console.log('fill from waitlist')
         // console.log(this.props)
-        await axios.post('/schedule/fill_from_waitlst', {
-            schedId: this.props.id,
-            schedDate: this.props.replaceDate,
-            animalType: this.props.animalType,
-            custName: this.props.custName,
-            custPhone: this.props.custPhone,
-            notes: this.props.notes,
-            slotId: this.props.replaceSlotId,
-            replaceId: this.props.replaceId
-        })
-        // console.log(res.data)
-        this.props.toggleWaitlistModal();
+        if (this.props.swapAllowed === false) {
+
+        } else {
+
+            await axios.post('/schedule/fill_from_waitlst', {
+                schedId: this.props.id,
+                schedDate: this.props.replaceDate,
+                animalType: this.props.animalType,
+                custName: this.props.custName,
+                custPhone: this.props.custPhone,
+                notes: this.props.notes,
+                slotId: this.props.replaceSlotId,
+                replaceId: this.props.replaceId
+            })
+            // console.log(res.data)
+            this.props.toggleWaitlistModal();
+        }
     }
 
     render() {
+
         return (
             <>
                 <div key={this.props.id} className='waitlist-item'>

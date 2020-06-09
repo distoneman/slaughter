@@ -3,7 +3,7 @@ import moment from 'moment';
 // import axios from 'axios';
 import { FaTrashAlt, FaInfoCircle, FaExchangeAlt, FaCheckCircle } from 'react-icons/fa'
 
-import DisplayWaitlist from './DisplayWaitlist';
+import DisplayWaitlist from '../Waitlist/DisplayWaitlist';
 import './OneDay.css';
 import axios from 'axios';
 // import axios from 'axios';
@@ -79,7 +79,7 @@ export default class DisplayOneDay extends Component {
     }
 
     confirm = async () => {
-        console.log('confirm')
+        // console.log('confirm')
         if(this.props.schedStatus === 'Scheduled'){
             await this.props.confirmSchedule(this.props.id)
         } else {
