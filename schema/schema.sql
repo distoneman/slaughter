@@ -19,14 +19,6 @@ CREATE TABLE k_slots(
     used_slots NUMERIC(10,0),
     notes VARCHAR(250));
     
-CREATE TABLE k_animal_type(
-    id serial PRIMARY KEY,
-    animal_type VARCHAR(25));
-    
-CREATE TABLE k_sched_status(
-    status_id serial PRIMARY KEY,
-    sched_status VARCHAR(50));
-
 CREATE TABLE k_monthly_defaults(
     id serial PRIMARY KEY,
     animal_type VARCHAR(20),
@@ -36,8 +28,6 @@ CREATE TABLE k_monthly_defaults(
     );
 
 GRANT ALL PRIVILEGES ON TABLE k_monthly_defaults TO circlev;
-GRANT ALL PRIVILEGES ON TABLE k_animal_type TO circlev;
-GRANT ALL PRIVILEGES ON TABLE k_sched_status TO circlev;
 GRANT ALL PRIVILEGES ON TABLE k_schedule TO circlev;
 GRANT ALL PRIVILEGES ON TABLE k_slots TO circlev;    
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO circlev;
