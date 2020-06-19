@@ -38,6 +38,7 @@ app.put('/schedule/cancel', scheduleCtrl.cancelSched);
 app.get('/schedule/get_waitlist/', scheduleCtrl.getWaitlist);
 app.post('/schedule/fill_from_waitlst', scheduleCtrl.fillFromWaitlist);
 app.put('/schedule/confirm', scheduleCtrl.updateConfirmedStatus);
+app.get('/schedule/getSlotId/', scheduleCtrl.getSlotId);
 
 // SEARCH
 app.get('/search/by_name/:name', searchCtrl.getCustomerByName);

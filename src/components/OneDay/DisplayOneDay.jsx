@@ -177,6 +177,9 @@ export default class DisplayOneDay extends Component {
                     {moment(this.props.statusChangeDate).format('l')}
                 </div>
                 <div className='schedule-item'>
+                    {this.props.notes}
+                </div>
+                <div className='schedule-item'>
                     <FaInfoCircle className='fa-icon-left'
                         onClick={this.toggleInfoModal} />
                     <FaTrashAlt className='fa-icon-left'

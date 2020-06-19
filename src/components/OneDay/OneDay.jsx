@@ -60,6 +60,7 @@ export default class OneDay extends Component {
 
 getScheduleByDate = async (direction) => {
     // console.log(direction)
+    // console.log(this.state.schedDate)
     var date = new Date(this.state.schedDate)
     // console.log(date)
     let dow = date.getDay()
@@ -82,12 +83,16 @@ getScheduleByDate = async (direction) => {
         }
     }
     const res = await axios.get(`/schedule/getScheduleByDate/?schedDate=${searchDate}&animalType=${this.state.animalType}`)
-    // console.log(res.data)
+    console.log(res.data)
     if (res.data.length === 0) {
         // alert("nobody scheduled")
+        // console.log(searchDate)
+        // console.log(this.state.animalType)
+        const res = await axios.get(`/schedule/getSlotId/?schedDate=${searchDate}&animalType=${this.state.animalType}`)
+        console.log(res.data)
         this.setState({
             schedDate: searchDate,
-            // res.data[0].sched_date,
+            slotId: res.data[0].id,
             // animalType: res.data[0].animal_type,
             daysSchedule: []
         })
@@ -96,9 +101,11 @@ getScheduleByDate = async (direction) => {
         this.setState({
             schedDate: res.data[0].sched_date,
             animalType: res.data[0].animal_type,
+            slotId: res.data[0].k_slots_id,
             daysSchedule: res.data
         })
     }
+    // console.log(this.state)
 }
 
 
@@ -130,7 +137,8 @@ confirmSchedule = async(id) => {
 }
 
 toggleSchedule = async () => {
-    // console.log('toggle schedule modal')
+    console.log('toggle schedule modal')
+    console.log(this.state.slotId)
     await this.setState({
         scheduleModal: !this.state.scheduleModal
     })
@@ -216,11 +224,13 @@ render() {
                 <div></div>
                 <div></div>
                 <div></div>
+                <div></div>
                 <div className='schedule-title-item'>Animal Type</div>
                 <div className='schedule-title-item'>Name</div>
                 <div className='schedule-title-item'>Phone</div>
                 <div className='schedule-title-item'>Status</div>
                 <div className='schedule-title-item'>Status Date</div>
+                <div className='schedule-title-item'>Notes</div>
                 <div className='schedule-title-item'></div>
                 {displayOneDaySchedule}
             </div>

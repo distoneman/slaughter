@@ -69,6 +69,16 @@ module.exports = {
         let response = await db.settings.updateConfirmed({ 
             id, schedDate, animalType })
         res.status(200).send(response)
+    },
+    getSlotId: async(req, res) => {
+        // console.log('get slot id')
+        let animalType = req.query.animalType;
+        let schedDate = req.query.schedDate;
+        const db = req.app.get('db')
+        let response = await db.settings.getSlotId({
+            animalType, schedDate
+        })
+        res.status(200).send(response)
     }
 }
 

@@ -18,11 +18,11 @@
 }
 
 .schedule-title-row{
-    width: 80%;
+    width: 85%;
     display: grid;
     z-index: 1;
     /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
-    grid-template-columns: .7fr 1.5fr 1.2fr .7fr .7fr .5fr;
+    grid-template-columns: .5fr 1.4fr 1.0fr .7fr .6fr 1.0fr .5fr;
     margin-left: 3em;
 }
 
