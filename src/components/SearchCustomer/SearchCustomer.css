@@ -13,11 +13,11 @@
 }
 
 .cust-results-container {
-    width: 80%;
+    width: 85%;
     display: grid;
     z-index: 1;
     /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
-    grid-template-columns: 2fr .8fr .8fr .8fr .8fr .5fr;
+    grid-template-columns: 1.4fr .6fr .8fr .8fr .7fr .7fr .4fr;
     margin-left: 3em;
 }
 

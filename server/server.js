@@ -42,3 +42,5 @@ app.get('/schedule/getSlotId/', scheduleCtrl.getSlotId);
 
 // SEARCH
 app.get('/search/by_name/:name', searchCtrl.getCustomerByName);
+app.get('/search/by_phone/:phone', searchCtrl.getCustomerByPhone);
+app.get('/search/by_status_date/', searchCtrl.getCustomerByStatusDate);

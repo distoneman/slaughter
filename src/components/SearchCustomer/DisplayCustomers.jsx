@@ -15,6 +15,7 @@ export default class DisplayCustomers extends Component {
                     {this.props.custName}
                 </div>
                 <div className='search-item'>{this.props.animalType}</div>
+                <div className='search-item'>{this.props.phone}</div>
                 <div className='search-item'>
                     {moment(this.props.schedDate).utc().format('l')}
                 </div>

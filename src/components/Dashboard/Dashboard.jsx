@@ -33,16 +33,16 @@ export default class Dashboard extends Component {
     // }
 
     getDailyDetail = async () => {
-        this.setState({
-            dailyDetail: []
-        })
+        // this.setState({
+        //     dailyDetail: []
+        // })
         // console.log('get daily detail')
         // console.log(this.state.animalType)
         let animalType = this.state.animalType
         let year = this.state.searchYear
         let month = this.state.searchMonth
         const res = await axios.get(`/settings/get_daily/${animalType}&${year}&${month}`)
-        // console.log(res)
+        // console.log(res.data)
         if (res.data.length === 0) {
             // console.log("empty")
         }
@@ -58,9 +58,10 @@ export default class Dashboard extends Component {
 
     addDays = async () => {
         // console.log("add Days")
-        this.getDailyDetail();
+        await this.getDailyDetail();
         if (this.state.dailyDetail.length > 0) {
             // console.log("already populated")
+            alert('Dates Already Populated')
         } else {
             const res = await axios.get(`/settings/getDefault/${this.state.animalType}&${this.state.searchMonth}`)
             let defaultMaxSlots = res.data[0].default_max_slots
