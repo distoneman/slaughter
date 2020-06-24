@@ -20,11 +20,16 @@ export default class Settings extends Component {
     }
 
     async componentDidMount() {
+        this.getDefaultSlotsValues();
+    }
+
+    getDefaultSlotsValues = async () => {
         const res = await axios.get(`/settings/getDefaultMonth/${this.state.searchMonth}`)
         // console.log(res.data)
         this.setState ({
             monthlyDefaults: res.data
         })
+
     }
 
     async handleChange(key, value) {
@@ -104,9 +109,7 @@ export default class Settings extends Component {
             max_slots: max_slots
         })
     }
-    editDefaultSlots = async () => {
-        console.log('edit default slots')
-    }
+
 
 
 
@@ -120,6 +123,8 @@ export default class Settings extends Component {
                     animalType = {slot.animal_type}
                     killMonth = {slot.kill_month}
                     maxSlots = {slot.default_max_slots}
+                    updateSlots  = {this.updateSlots}
+                    getDefaultSlotsValues = {this.getDefaultSlotsValues}
                 />
             )
         })

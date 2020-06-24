@@ -69,5 +69,15 @@ module.exports = {
         })
         res.status(200).send(response)
        
+    },
+    updateDefaultSlots: async (req, res) => {
+        // console.log('update slots')
+        // console.log(req.body)
+        const {id, maxSlots} = req.body;
+        const db = req.app.get('db')
+        let response = await db.settings.updateDefaultSlots({
+            id, maxSlots
+        })
+        res.status(200).send(response)
     }
 }

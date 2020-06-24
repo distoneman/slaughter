@@ -25,3 +25,16 @@
     margin-right: .25em;
     float: right;
 }
+
+.edit-modal-view {
+    background-color:#b3cbf7;
+    position: absolute;
+    left: 20rem;
+    z-index: 1;
+    /* height: 18rem; */
+    width: 40rem;
+    border-radius: 10px;
+    border: solid 2px #071838;
+    box-shadow: 5px 5px 5px #071838;
+    padding: 1.5em;
+}

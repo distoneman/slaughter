@@ -29,6 +29,7 @@ app.post('/settings/addSlots' , settingsCtrl.addSlots);
 app.get('/settings/get_day_slots/', settingsCtrl.getOneDaySlots);
 app.put('/settings/update_slots', settingsCtrl.updateSlots);
 app.get('/settings/getDefaultMonth', settingsCtrl.getSlotDefaultByMonth);
+app.put('/settings/updateDefaultSlots', settingsCtrl.updateDefaultSlots);
 
 // SCHEDULE
 app.get('/schedule/available_slots/:id', scheduleCtrl.getAvailable);
