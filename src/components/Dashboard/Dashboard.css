@@ -1,7 +1,24 @@
+.settings-page {
+    margin-left: 1em;
+}
+
+.page-title {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.page-sub-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding-left: .8em;
+    padding-bottom: .4em;
+}
+
 .search-label {
     padding: 4px 7px;
     margin: 4px 4px;
     text-align: right;
+    margin-left: 1.5em;
 }
 
 .search-select {

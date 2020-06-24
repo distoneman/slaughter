@@ -56,45 +56,45 @@ export default class Dashboard extends Component {
     }
 
 
-    addDays = async () => {
-        // console.log("add Days")
-        await this.getDailyDetail();
-        if (this.state.dailyDetail.length > 0) {
-            // console.log("already populated")
-            alert('Dates Already Populated')
-        } else {
-            const res = await axios.get(`/settings/getDefault/${this.state.animalType}&${this.state.searchMonth}`)
-            let defaultMaxSlots = res.data[0].default_max_slots
-            let numDays = 0
-            numDays = new Date(this.state.searchYear, this.state.searchMonth, 0).getDate();
-            var i;
-            for (i = 1; i <= numDays; i++) {
-                var dateStr = `${this.state.searchMonth}/${i}/${this.state.searchYear}`
-                var date = new Date(dateStr)
-                var day = date.getDay()
-                switch (day) {
-                    case 0:
-                        // console.log("Today is Weekend");
-                        break;
-                    case 6:
-                        // console.log("Today is Weekend");
-                        break;
-                    default:
-                        await this.addSlots(date, defaultMaxSlots)
-                }
-            }
-            alert("slots added")
-            this.getDailyDetail()
-        }
-    }
+    // addDays = async () => {
+    //     // console.log("add Days")
+    //     await this.getDailyDetail();
+    //     if (this.state.dailyDetail.length > 0) {
+    //         // console.log("already populated")
+    //         alert('Dates Already Populated')
+    //     } else {
+    //         const res = await axios.get(`/settings/getDefault/${this.state.animalType}&${this.state.searchMonth}`)
+    //         let defaultMaxSlots = res.data[0].default_max_slots
+    //         let numDays = 0
+    //         numDays = new Date(this.state.searchYear, this.state.searchMonth, 0).getDate();
+    //         var i;
+    //         for (i = 1; i <= numDays; i++) {
+    //             var dateStr = `${this.state.searchMonth}/${i}/${this.state.searchYear}`
+    //             var date = new Date(dateStr)
+    //             var day = date.getDay()
+    //             switch (day) {
+    //                 case 0:
+    //                     // console.log("Today is Weekend");
+    //                     break;
+    //                 case 6:
+    //                     // console.log("Today is Weekend");
+    //                     break;
+    //                 default:
+    //                     await this.addSlots(date, defaultMaxSlots)
+    //             }
+    //         }
+    //         alert("slots added")
+    //         this.getDailyDetail()
+    //     }
+    // }
 
-    addSlots = async (slot_date, max_slots) => {
-        await axios.post('/settings/addSlots', {
-            slot_date: moment(slot_date).format('l'),
-            animal_type: this.state.animalType,
-            max_slots: max_slots
-        })
-    }
+    // addSlots = async (slot_date, max_slots) => {
+    //     await axios.post('/settings/addSlots', {
+    //         slot_date: moment(slot_date).format('l'),
+    //         animal_type: this.state.animalType,
+    //         max_slots: max_slots
+    //     })
+    // }
 
 
     render() {
@@ -166,7 +166,7 @@ export default class Dashboard extends Component {
                 <button className='search-button'
                     onClick={this.getDailyDetail} >Search
                 </button>
-                <button className='search-button' onClick={this.addDays}>Add</button>
+                {/* <button className='search-button' onClick={this.addDays}>Add</button> */}
                 <hr />
                 <div className='search-results-title'>
                     <div className='search-results-item-title'>Date</div>

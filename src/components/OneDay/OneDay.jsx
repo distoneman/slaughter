@@ -83,13 +83,13 @@ getScheduleByDate = async (direction) => {
         }
     }
     const res = await axios.get(`/schedule/getScheduleByDate/?schedDate=${searchDate}&animalType=${this.state.animalType}`)
-    console.log(res.data)
+    // console.log(res.data)
     if (res.data.length === 0) {
         // alert("nobody scheduled")
         // console.log(searchDate)
         // console.log(this.state.animalType)
         const res = await axios.get(`/schedule/getSlotId/?schedDate=${searchDate}&animalType=${this.state.animalType}`)
-        console.log(res.data)
+        // console.log(res.data)
         this.setState({
             schedDate: searchDate,
             slotId: res.data[0].id,
@@ -130,15 +130,15 @@ confirmSchedule = async(id) => {
     let animalType = this.state.animalType
     const res = await axios.put(`/schedule/confirm`,
         {id, schedDate, animalType})
-    console.log(res.data)
+    // console.log(res.data)
     this.setState({
         daysSchedule: res.data
     })
 }
 
 toggleSchedule = async () => {
-    console.log('toggle schedule modal')
-    console.log(this.state.slotId)
+    // console.log('toggle schedule modal')
+    // console.log(this.state.slotId)
     await this.setState({
         scheduleModal: !this.state.scheduleModal
     })
@@ -146,16 +146,6 @@ toggleSchedule = async () => {
         this.getScheduleById(this.state.slotId);
     }
 }
-
-async handleChange(key, value) {
-    // console.log(key)
-    // console.log(value.target.value)
-    // this.setState({
-    //     [key]: value.target.value
-    // })
-    // console.log(this.state)
-}
-
 
 render() {
     let displayOneDaySchedule = this.state.daysSchedule.map(slot => {

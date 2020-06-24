@@ -32,7 +32,7 @@ export default class DisplayOneDay extends Component {
         this.setState({
             infoModal: !this.state.infoModal
         })
-        console.log(this.state.infoModal)
+        // console.log(this.state.infoModal)
     }
 
     toggleWaitlistModal = async () => {
