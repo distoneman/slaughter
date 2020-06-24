@@ -59,5 +59,15 @@ module.exports = {
             beefId, beefMax, porkId, porkMax, sheepId, sheepMax
         })
         res.status(200).send(response)
+    },
+    getSlotDefaultByMonth: async (req, res) => {
+        // console.log('get slot defaults')
+        let month_num = req.params.month
+        const db = req.app.get('db')
+        let response = await db.settings.getSlotDefaultsByMonth({
+            
+        })
+        res.status(200).send(response)
+       
     }
 }

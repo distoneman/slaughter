@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import moment from 'moment';
+import DisplayDefaults from './DisplayDefaults';
+
+import './Settings.css'
+
 
 export default class Settings extends Component {
     constructor(props) {
@@ -11,7 +15,16 @@ export default class Settings extends Component {
             searchMonth: '',
             daysInMonth: 0,
             dailyDetail: [],
+            monthlyDefaults: []
         }
+    }
+
+    async componentDidMount() {
+        const res = await axios.get(`/settings/getDefaultMonth/${this.state.searchMonth}`)
+        // console.log(res.data)
+        this.setState ({
+            monthlyDefaults: res.data
+        })
     }
 
     async handleChange(key, value) {
@@ -91,10 +104,26 @@ export default class Settings extends Component {
             max_slots: max_slots
         })
     }
+    editDefaultSlots = async () => {
+        console.log('edit default slots')
+    }
+
 
 
 
     render() {
+        var displayDefaults  = this.state.monthlyDefaults.map(slot => {
+            return(
+                <DisplayDefaults
+                    key={slot.id}
+                    id={slot.id}
+                    animalType = {slot.animal_type}
+                    killMonth = {slot.kill_month}
+                    maxSlots = {slot.default_max_slots}
+                />
+            )
+        })
+
         return (
             <div className='settings-page'>
                 <div className='page-title'>
@@ -141,26 +170,13 @@ export default class Settings extends Component {
                     <button className='search-button' onClick={this.addDays}>Add</button>
                 </div>
                 <hr />
-                <div className='page-sub-title'>Edit Monthly Default Values</div>
-                <label className='search-label'>Month:</label>
-                <select name="month" id="month" className='search-select'
-                    onChange={e => this.handleChange("searchMonth", e)}>
-                    <option value=""></option>
-                    <option value="01">January</option>
-                    <option value="02">February</option>
-                    <option value="03">March</option>
-                    <option value="04">April</option>
-                    <option value="05">May</option>
-                    <option value="06">June</option>
-                    <option value="07">July</option>
-                    <option value="08">August</option>
-                    <option value="09">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                </select>
-
-
+                <div className='page-sub-title'>Monthly Default Values</div>
+                <div className='monthly-slots-container'>
+                    <div className='monthly-slots-title-row'>Month</div>
+                    <div className='monthly-slots-title-row'>Animal Type</div>
+                    <div className='monthly-slots-title-row'>Max Slots</div>
+                    {displayDefaults}
+                </div>
             </div>
 
         )

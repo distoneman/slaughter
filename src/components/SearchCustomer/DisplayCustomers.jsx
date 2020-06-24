@@ -11,7 +11,7 @@ export default class DisplayCustomers extends Component {
     render() {
         return (
             <>
-                <div className='search-item' k={this.props.id}>
+                <div className='search-item' key={this.props.id}>
                     {this.props.custName}
                 </div>
                 <div className='search-item'>{this.props.animalType}</div>

@@ -1,0 +1,27 @@
+.monthly-slots-container {
+    width: 30%;
+    display: grid;
+    grid-template-columns: 1fr 1fr .7fr;
+    margin-left: 5em;
+}
+
+.monthly-slots-title-row {
+    border: solid 1px #474545;
+    background: lightgrey;
+    padding: .25em;
+    font-size: 11pt;
+    font-weight: 700;
+}
+
+.monthly-slots-item {
+    border: solid 1px #474545;
+    padding: .4em;
+    font-size: 11pt;
+}
+
+.fa-icon{
+    cursor: pointer;
+    color: #123a83;
+    margin-right: .25em;
+    float: right;
+}
