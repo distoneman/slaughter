@@ -24,7 +24,7 @@ export default class Settings extends Component {
     }
 
     getDefaultSlotsValues = async () => {
-        const res = await axios.get(`/settings/getDefaultMonth/${this.state.searchMonth}`)
+        const res = await axios.get(`/settings/getDefaultByMonth/${this.state.searchMonth}`)
         // console.log(res.data)
         this.setState ({
             monthlyDefaults: res.data
