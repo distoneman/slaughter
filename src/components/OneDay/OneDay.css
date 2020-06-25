@@ -47,7 +47,7 @@
     font-size: 12pt;
 }
 
-.cancel-modal-view, .info-modal-view {
+.cancel-modal-view, .info-modal-view, .edit-modal-view {
     background-color:#b3cbf7;
     position: absolute;
     left: 20rem;
@@ -113,4 +113,14 @@
     border: solid 1px #474545;
     padding: .4em;
     font-size: 11pt;
+}
+
+.edit-modal-container{
+    width: 90%;
+    display: grid;
+    z-index: 1;
+    /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
+    grid-template-columns: .6fr 1fr;
+    /* margin-left: 1em; */
+  
 }

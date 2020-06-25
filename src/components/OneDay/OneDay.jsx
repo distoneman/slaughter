@@ -126,6 +126,18 @@ cancelSchedule = async (id, cancelledBy) => {
     })
 }
 
+updateCustomer = async (id, custName, custPhone, notes) => {
+    // console.log(id, custName, custPhone, notes)
+    let schedDate = this.state.schedDate
+    let animalType = this.state.animalType
+    const res = await axios.put(`/schedule/updateCustomer`, 
+        {id, custName, custPhone, notes, schedDate, animalType})
+    // await console.log(res.data)
+    this.setState({
+        daysSchedule: res.data
+    })
+}
+
 confirmSchedule = async(id) => {
     let schedDate = this.state.schedDate
     let animalType = this.state.animalType
@@ -168,6 +180,7 @@ render() {
                 toggleCancelModal={this.toggleCancelModal}
                 getScheduleById={this.getScheduleById}
                 confirmSchedule={this.confirmSchedule}
+                updateCustomer={this.updateCustomer}
             />
         )
     })

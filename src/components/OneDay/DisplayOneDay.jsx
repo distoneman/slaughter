@@ -17,6 +17,10 @@ export default class DisplayOneDay extends Component {
             infoModal: false,
             waitlistModal: false,
             waitList: [],
+            editModal: false,
+            custName: '',
+            custPhone: '',
+            notes: '',
         }
     }
 
@@ -25,6 +29,16 @@ export default class DisplayOneDay extends Component {
             cancelModal: !this.state.cancelModal,
             cancelledBy: ''
         })
+    }
+
+    toggleEditModal = async () => {
+        this.setState({
+            editModal: !this.state.editModal,
+            custName: this.props.custName,
+            custPhone: this.props.custPhone,
+            notes: this.props.notes
+        })
+        // console.log(this.state.custName)
     }
 
     toggleInfoModal = async () => {
@@ -55,7 +69,7 @@ export default class DisplayOneDay extends Component {
     }
 
     getWaitlist = async () => {
-        console.log(this.props.schedDate)
+        // console.log(this.props.schedDate)
         const res = await axios.get(`/schedule/get_waitlist/?schedDate=${this.props.schedDate}&animalType=${this.props.animalType}`)
         this.setState({
             waitList: res.data
@@ -70,7 +84,7 @@ export default class DisplayOneDay extends Component {
         this.setState({
             [key]: value.target.value
         })
-        // console.log(this.state)
+        // await console.log(this.state.custName)
     }
 
     cancel = async () => {
@@ -78,9 +92,18 @@ export default class DisplayOneDay extends Component {
         await this.toggleCancelModal()
     }
 
+    update = async() => {
+        // console.log('update customer')
+        // console.log(this.state)
+        // console.log(this.props.id)
+        await this.props.updateCustomer(this.props.id, this.state.custName, this.state.custPhone, this.state.notes)
+        // console.log(res.data)
+        this.toggleEditModal()
+    }
+
     confirm = async () => {
         // console.log('confirm')
-        if(this.props.schedStatus === 'Scheduled'){
+        if (this.props.schedStatus === 'Scheduled') {
             await this.props.confirmSchedule(this.props.id)
         } else {
             alert("You can only Confirm a Scheduled appointment")
@@ -119,6 +142,31 @@ export default class DisplayOneDay extends Component {
                             onClick={this.cancel}>
                             Cancel
                         </button>
+                    </div>
+                ) : (
+                        null
+                    )}
+
+                {this.state.editModal ? (
+                    <div className='edit-modal-view'>
+                        <button className='close-cancel-modal' onClick={this.toggleEditModal}>X</button>
+                        <div className='edit-modal-container'>
+                            <label className='form-label'>Customer Name: </label>
+                            <input className='form-user-input' defaultValue={this.props.custName} 
+                                onChange={e => this.handleChange('custName', e)}/>
+                            <label className='form-label'>Phone Number: </label>
+                            <input className='form-user-input' defaultValue={this.props.custPhone} 
+                                onChange={e => this.handleChange('custPhone', e)}/>
+                            <label className='form-label'>Notes: </label>
+                            <input className='form-user-input' defaultValue={this.props.notes} 
+                                onChange={e => this.handleChange('notes', e)}/>
+                            <div></div>
+                            <button className='search-button'
+                                onClick={this.update}>
+                                Update
+                            </button>
+
+                        </div>
                     </div>
                 ) : (
                         null
@@ -182,7 +230,8 @@ export default class DisplayOneDay extends Component {
                 <div className='schedule-item'>
                     <FaInfoCircle className='fa-icon-left'
                         onClick={this.toggleInfoModal} />
-                    <FaEdit className='fa-icon-left' />
+                    <FaEdit className='fa-icon-left'
+                        onClick={this.toggleEditModal} />
                     <FaTrashAlt className='fa-icon-left'
                         onClick={this.toggleCancelModal} />
                     <FaExchangeAlt className='fa-icon-left'
