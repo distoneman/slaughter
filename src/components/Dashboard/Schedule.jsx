@@ -77,18 +77,29 @@ export default class Schedule extends Component {
         // console.log("add schedule")
         // console.log(this.state)
         // console.log(moment().format('l, h:mm:ss a'))
-        for (let i = 1; i <= this.state.slots; i++) {
-            await axios.post("/schedule/addSchedule", {
-                slotId: this.state.slotId,
-                schedDate: moment(this.state.schedDate).format('l'),
-                animalType: this.state.animalType,
-                custName: this.state.custName,
-                custPhone: this.state.custPhone,
-                schedStatus: 'Scheduled',
-                changeDate: moment().format('l,  h:mm:ss a'),
-                waitList: this.state.waitList,
-                notes: this.state.notes
-            })
+        // console.log(this.props.id)
+        let res = await axios.get(`/schedule/available_slots/${this.props.id}`)
+        // console.log(res.data)
+        let availableSlots = res.data[0].max_slots - res.data[0].used_slots
+        // console.log(availableSlots)
+        // console.log(this.state.slots)
+        if (this.state.slots > availableSlots) {
+            alert('Slots no longer available')
+        } else {
+            console.log('slots available')
+            for (let i = 1; i <= this.state.slots; i++) {
+                await axios.post("/schedule/addSchedule", {
+                    slotId: this.state.slotId,
+                    schedDate: moment(this.state.schedDate).format('l'),
+                    animalType: this.state.animalType,
+                    custName: this.state.custName,
+                    custPhone: this.state.custPhone,
+                    schedStatus: 'Scheduled',
+                    changeDate: moment().format('l,  h:mm:ss a'),
+                    waitList: this.state.waitList,
+                    notes: this.state.notes
+                })
+            }
         }
         this.props.toggleSchedule();
     }

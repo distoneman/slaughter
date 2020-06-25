@@ -84,6 +84,7 @@ getScheduleByDate = async (direction) => {
     }
     const res = await axios.get(`/schedule/getScheduleByDate/?schedDate=${searchDate}&animalType=${this.state.animalType}`)
     // console.log(res.data)
+    // console.log(this.state)
     if (res.data.length === 0) {
         // alert("nobody scheduled")
         // console.log(searchDate)
@@ -96,7 +97,7 @@ getScheduleByDate = async (direction) => {
             // animalType: res.data[0].animal_type,
             daysSchedule: []
         })
-
+        
     } else {
         this.setState({
             schedDate: res.data[0].sched_date,

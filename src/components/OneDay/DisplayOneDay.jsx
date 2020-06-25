@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 // import axios from 'axios';
-import { FaTrashAlt, FaInfoCircle, FaExchangeAlt, FaCheckCircle } from 'react-icons/fa'
+import { FaEdit, FaTrashAlt, FaInfoCircle, FaExchangeAlt, FaCheckCircle } from 'react-icons/fa'
 
 import DisplayWaitlist from '../Waitlist/DisplayWaitlist';
 import './OneDay.css';
@@ -182,6 +182,7 @@ export default class DisplayOneDay extends Component {
                 <div className='schedule-item'>
                     <FaInfoCircle className='fa-icon-left'
                         onClick={this.toggleInfoModal} />
+                    <FaEdit className='fa-icon-left' />
                     <FaTrashAlt className='fa-icon-left'
                         onClick={this.toggleCancelModal} />
                     <FaExchangeAlt className='fa-icon-left'
