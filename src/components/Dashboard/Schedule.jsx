@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 import './Dashboard.css';
 
@@ -84,7 +85,13 @@ export default class Schedule extends Component {
         // console.log(availableSlots)
         // console.log(this.state.slots)
         if (this.state.slots > availableSlots) {
-            alert('Slots no longer available')
+            // alert('Slots no longer available')
+            Swal.fire({
+                title: 'Slots are no longer available!',
+                // text: 'Do you want to continue',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+              })
         } else {
             console.log('slots available')
             for (let i = 1; i <= this.state.slots; i++) {

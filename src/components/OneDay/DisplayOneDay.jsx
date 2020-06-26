@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-// import axios from 'axios';
+import Swal from 'sweetalert2';
 import { FaEdit, FaTrashAlt, FaInfoCircle, FaExchangeAlt, FaCheckCircle } from 'react-icons/fa'
 
 import DisplayWaitlist from '../Waitlist/DisplayWaitlist';
@@ -58,7 +58,14 @@ export default class DisplayOneDay extends Component {
                 waitlistModal: !this.state.waitlistModal
             })
         } else {
-            alert('You must cancel first')
+            // alert('You must cancel first')
+            Swal.fire({
+                title: 'You must cancel before filling from Waitlist',
+                // text: 'Do you want to continue',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+              })
+
         }
         if (this.state.waitlistModal === true) {
             await this.getWaitlist();
@@ -92,7 +99,7 @@ export default class DisplayOneDay extends Component {
         await this.toggleCancelModal()
     }
 
-    update = async() => {
+    update = async () => {
         // console.log('update customer')
         // console.log(this.state)
         // console.log(this.props.id)
@@ -106,7 +113,14 @@ export default class DisplayOneDay extends Component {
         if (this.props.schedStatus === 'Scheduled') {
             await this.props.confirmSchedule(this.props.id)
         } else {
-            alert("You can only Confirm a Scheduled appointment")
+            // alert("You can only Confirm a Scheduled appointment")
+            Swal.fire({
+                title: 'You can only Confirm a Scheduled appointment',
+                // text: 'Do you want to continue',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            })
+
         }
     }
 
@@ -152,14 +166,14 @@ export default class DisplayOneDay extends Component {
                         <button className='close-cancel-modal' onClick={this.toggleEditModal}>X</button>
                         <div className='edit-modal-container'>
                             <label className='form-label'>Customer Name: </label>
-                            <input className='form-user-input' defaultValue={this.props.custName} 
-                                onChange={e => this.handleChange('custName', e)}/>
+                            <input className='form-user-input' defaultValue={this.props.custName}
+                                onChange={e => this.handleChange('custName', e)} />
                             <label className='form-label'>Phone Number: </label>
-                            <input className='form-user-input' defaultValue={this.props.custPhone} 
-                                onChange={e => this.handleChange('custPhone', e)}/>
+                            <input className='form-user-input' defaultValue={this.props.custPhone}
+                                onChange={e => this.handleChange('custPhone', e)} />
                             <label className='form-label'>Notes: </label>
-                            <input className='form-user-input' defaultValue={this.props.notes} 
-                                onChange={e => this.handleChange('notes', e)}/>
+                            <input className='form-user-input' defaultValue={this.props.notes}
+                                onChange={e => this.handleChange('notes', e)} />
                             <div></div>
                             <button className='search-button'
                                 onClick={this.update}>

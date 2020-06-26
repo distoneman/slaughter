@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import moment from 'moment';
 import DisplayDefaults from './DisplayDefaults';
+import Swal from 'sweetalert2';
 
 import './Settings.css'
 
@@ -75,7 +76,14 @@ export default class Settings extends Component {
         await this.getDailyDetail();
         if (this.state.dailyDetail.length > 0) {
             // console.log("already populated")
-            alert('Dates Already Populated')
+            // alert('Dates Already Populated')
+            Swal.fire({
+                title: 'Dates are already populated',
+                // text: 'Do you want to continue',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+              })
+
         } else {
             const res = await axios.get(`/settings/getDefault/${this.state.animalType}&${this.state.searchMonth}`)
             let defaultMaxSlots = res.data[0].default_max_slots
@@ -97,7 +105,15 @@ export default class Settings extends Component {
                         await this.addSlots(date, defaultMaxSlots)
                 }
             }
-            alert("slots added")
+            // alert("slots added")
+            Swal.fire({
+                title: 'Dates populated with default numbers',
+                // text: 'Do you want to continue',
+                icon: 'success',
+                confirmButtonText: 'Okay'
+              })
+
+
             // this.getDailyDetail()
         }
     }
