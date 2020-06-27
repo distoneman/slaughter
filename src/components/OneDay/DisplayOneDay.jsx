@@ -32,14 +32,24 @@ export default class DisplayOneDay extends Component {
     }
 
     toggleEditModal = async () => {
+        console.log(this.props.waitlistFlag)
         this.setState({
             editModal: !this.state.editModal,
             custName: this.props.custName,
             custPhone: this.props.custPhone,
-            notes: this.props.notes
+            notes: this.props.notes,
+            waitlistFlag: this.props.waitlistFlag
         })
-        // console.log(this.state.custName)
+        console.log(this.state)
     }
+
+    async toggleWaitlistFlag() {
+        await this.setState({
+            waitlistFlag: !this.state.waitlistFlag
+        })
+        console.log(this.state)
+    }
+
 
     toggleInfoModal = async () => {
         // console.log("info modal")
@@ -64,7 +74,7 @@ export default class DisplayOneDay extends Component {
                 // text: 'Do you want to continue',
                 icon: 'error',
                 confirmButtonText: 'Okay'
-              })
+            })
 
         }
         if (this.state.waitlistModal === true) {
@@ -103,7 +113,7 @@ export default class DisplayOneDay extends Component {
         // console.log('update customer')
         // console.log(this.state)
         // console.log(this.props.id)
-        await this.props.updateCustomer(this.props.id, this.state.custName, this.state.custPhone, this.state.notes)
+        await this.props.updateCustomer(this.props.id, this.state.custName, this.state.custPhone, this.state.notes, this.state.waitlistFlag)
         // console.log(res.data)
         this.toggleEditModal()
     }
@@ -171,6 +181,10 @@ export default class DisplayOneDay extends Component {
                             <label className='form-label'>Phone Number: </label>
                             <input className='form-user-input' defaultValue={this.props.custPhone}
                                 onChange={e => this.handleChange('custPhone', e)} />
+                            <label className='form-label'>Waitlist:</label>
+                            <input type="checkbox" className='form-checkbox'
+                                checked={this.state.waitlistFlag}
+                                onChange={e => this.toggleWaitlistFlag()} />
                             <label className='form-label'>Notes: </label>
                             <input className='form-user-input' defaultValue={this.props.notes}
                                 onChange={e => this.handleChange('notes', e)} />

@@ -83,11 +83,12 @@ module.exports = {
     updateCustomer: async(req, res) => {
         // console.log('update')
         let {id, custName, custPhone, notes, 
-            schedDate, animalType } = req.body
+            schedDate, animalType, 
+            waitlistFlag} = req.body
         const db = req.app.get('db')
         let response = await db.settings.updateCustomer({
             id, custName, custPhone, notes, 
-            schedDate, animalType
+            schedDate, animalType, waitlistFlag
         })
         res.status(200).send(response)
     }

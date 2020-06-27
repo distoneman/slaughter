@@ -56,6 +56,7 @@ export default class DisplayDays extends Component {
         // console.log(this.state)
     }
 
+
     updateSlots = async () => {
         // console.log('update slots')
         await axios.put(`/settings/update_slots`, {
