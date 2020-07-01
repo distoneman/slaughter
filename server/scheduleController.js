@@ -91,6 +91,14 @@ module.exports = {
             schedDate, animalType, waitlistFlag
         })
         res.status(200).send(response)
+    },
+    deleteAppointment: async(req, res) => {
+        let {id, slotId, schedDate, animalType} = req.body
+        const db = req.app.get('db')
+        let response = await db.settings.deleteAppointment({
+            id, slotId, schedDate, animalType
+        })
+        res.status(200).send(response)
     }
 }
 

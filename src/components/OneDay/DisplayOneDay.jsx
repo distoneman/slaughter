@@ -118,6 +118,11 @@ export default class DisplayOneDay extends Component {
         this.toggleEditModal()
     }
 
+    delete= async() => {
+        await this.props.deleteAppointment(this.props.id, this.props.slotId)
+        this.toggleInfoModal();
+    }
+
     confirm = async () => {
         // console.log('confirm')
         if (this.props.schedStatus === 'Scheduled') {
@@ -209,6 +214,12 @@ export default class DisplayOneDay extends Component {
                             </div>
                             <div>
                                 <b>Schedule Notes: </b>{this.props.notes}
+                            </div>
+                            <hr/>
+                            <div>
+                                <button className='search-button'
+                                    onClick={this.delete}>Delete
+                                </button>
                             </div>
                         </div>
                     </>
