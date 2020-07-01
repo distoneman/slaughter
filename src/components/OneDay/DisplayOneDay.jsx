@@ -119,7 +119,7 @@ export default class DisplayOneDay extends Component {
     }
 
     delete= async() => {
-        await this.props.deleteAppointment(this.props.id, this.props.slotId)
+        this.props.deleteAppointment(this.props.id, this.props.slotId)
         this.toggleInfoModal();
     }
 

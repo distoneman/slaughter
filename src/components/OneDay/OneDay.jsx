@@ -156,7 +156,7 @@ deleteAppointment = async (id, slotId) => {
     let animalType = this.state.animalType
     const res = await axios.put(`/schedule/deleteAppointment`, 
         {id, slotId, schedDate, animalType})
-    this.setState({
+    await this.setState({
         daysSchedule: res.data
     })
 }
