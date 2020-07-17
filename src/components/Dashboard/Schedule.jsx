@@ -93,7 +93,7 @@ export default class Schedule extends Component {
                 confirmButtonText: 'Okay'
               })
         } else {
-            console.log('slots available')
+            // console.log('slots available')
             for (let i = 1; i <= this.state.slots; i++) {
                 await axios.post("/schedule/addSchedule", {
                     slotId: this.state.slotId,

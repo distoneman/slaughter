@@ -76,6 +76,7 @@ export default class Waitlist extends Component {
                     <div className='waitlist-title-item'>Date Scheduled</div>
                     <div className='waitlist-title-item'>Customer Name</div>
                     <div className='waitlist-title-item'>Customer Phone</div>
+                    <div className='waitlist-title-item'>Notes</div>
                     <div> </div>
                     {displayWaitlist}
                 </div>

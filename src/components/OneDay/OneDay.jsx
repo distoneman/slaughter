@@ -150,8 +150,8 @@ confirmSchedule = async(id) => {
 }
 
 deleteAppointment = async (id, slotId) => {
-    console.log(id)
-    console.log(slotId)
+    // console.log(id)
+    // console.log(slotId)
     let schedDate = this.state.schedDate
     let animalType = this.state.animalType
     const res = await axios.put(`/schedule/deleteAppointment`, 

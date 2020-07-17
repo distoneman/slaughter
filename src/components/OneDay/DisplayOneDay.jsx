@@ -237,6 +237,7 @@ export default class DisplayOneDay extends Component {
                                 <div className='waitlist-title-item'>Date Scheduled</div>
                                 <div className='waitlist-title-item'>Customer Name</div>
                                 <div className='waitlist-title-item'>Customer Phone</div>
+                                <div className='waitlist-title-item'>Notes</div>
                                 <div></div>
                                 {displayWaitlist}
                             </div>

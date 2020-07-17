@@ -51,6 +51,9 @@ export default class DisplayWaitlist extends Component {
                     {this.props.custPhone}
                 </div>
                 <div className='waitlist-item'>
+                    {this.props.notes}
+                </div>
+                <div className='waitlist-item'>
                     <FaExchangeAlt className='fa-icon-left'
                         onClick={this.fillFromWaitlist} />
                 </div>
