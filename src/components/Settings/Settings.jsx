@@ -35,12 +35,12 @@ export default class Settings extends Component {
 
     async handleChange(key, value) {
         // console.log("handle Change")
-        console.log(key)
-        console.log(value.target.value)
+        // console.log(key)
+        // console.log(value.target.value)
         await this.setState({
             [key]: value.target.value
         });
-        console.log(this.state)
+        // console.log(this.state)
     }
 
     // toggleEditSlots = async () => {

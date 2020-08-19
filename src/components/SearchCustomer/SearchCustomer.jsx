@@ -120,6 +120,7 @@ export default class SearchCustomer extends Component {
                     <div className='cust-results-item-title'>Status</div>
                     <div className='cust-results-item-title'>Status Date</div>
                     <div className='cust-results-item-title'>Waitlist</div>
+                    <div className='cust-results-item-title'>Notes</div>
                     {displayCustomers}
                 </div>
             </div>
