@@ -73,7 +73,6 @@ export default class SearchCustomer extends Component {
         let animalType = this.state.animalType
         await axios.put(`/schedule/updateCustomer`, 
             {id, custName, custPhone, notes, schedDate, animalType, waitlistFlag})
-        // await console.log(res.data)
         await this.search()
         // this.setState({
         //     searchResults: res.data

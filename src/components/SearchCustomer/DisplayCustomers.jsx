@@ -24,7 +24,6 @@ export default class DisplayCustomers extends Component {
     }
 
     toggleEditModal = async () => {
-        // console.log('edit modal')
         // console.log(this.props)
         await this.setState({
             editModal: !this.state.editModal,
