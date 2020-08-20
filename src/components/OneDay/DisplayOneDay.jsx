@@ -32,7 +32,7 @@ export default class DisplayOneDay extends Component {
     }
 
     toggleEditModal = async () => {
-        console.log(this.props.waitlistFlag)
+        // console.log(this.props.waitlistFlag)
         this.setState({
             editModal: !this.state.editModal,
             custName: this.props.custName,
@@ -40,14 +40,14 @@ export default class DisplayOneDay extends Component {
             notes: this.props.notes,
             waitlistFlag: this.props.waitlistFlag
         })
-        console.log(this.state)
+        // console.log(this.state)
     }
 
     async toggleWaitlistFlag() {
         await this.setState({
             waitlistFlag: !this.state.waitlistFlag
         })
-        console.log(this.state)
+        // console.log(this.state)
     }
 
 

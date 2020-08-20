@@ -67,6 +67,20 @@ export default class SearchCustomer extends Component {
         })
     }
 
+    updateCustomer = async (id, custName, custPhone, notes, waitlistFlag) => {
+        // console.log(id, custName, custPhone, notes)
+        let schedDate = this.state.schedDate
+        let animalType = this.state.animalType
+        const res = await axios.put(`/schedule/updateCustomer`, 
+            {id, custName, custPhone, notes, schedDate, animalType, waitlistFlag})
+        // await console.log(res.data)
+        await this.search()
+        // this.setState({
+        //     searchResults: res.data
+        // })
+    }
+    
+
     render() {
         let displayCustomers = this.state.searchResults.map(cust => {
             // console.log(cust.waitlist_flag)
@@ -78,6 +92,7 @@ export default class SearchCustomer extends Component {
             return (
                 <DisplayCustomers
                     key={cust.sched_id}
+                    id={cust.sched_id}
                     schedDate={cust.sched_date}
                     phone={cust.cust_phone}
                     animalType={cust.animal_type}
@@ -88,6 +103,8 @@ export default class SearchCustomer extends Component {
                     cancelledBy={cust.cancelled_by}
                     waitList={waitList}
                     notes={cust.notes}
+                    updateCustomer={this.updateCustomer}
+                    waitlistFlag={cust.waitlist_flag}
                 />
             )
         })
