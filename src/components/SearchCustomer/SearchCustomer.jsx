@@ -83,6 +83,7 @@ export default class SearchCustomer extends Component {
     render() {
         let displayCustomers = this.state.searchResults.map(cust => {
             // console.log(cust.waitlist_flag)
+            console.log(cust)
             if (cust.waitlist_flag === true) {
                 var waitList = 'Yes'
             } else {
@@ -92,6 +93,7 @@ export default class SearchCustomer extends Component {
                 <DisplayCustomers
                     key={cust.sched_id}
                     id={cust.sched_id}
+                    slotId={cust.k_slots_id}
                     schedDate={cust.sched_date}
                     phone={cust.cust_phone}
                     animalType={cust.animal_type}

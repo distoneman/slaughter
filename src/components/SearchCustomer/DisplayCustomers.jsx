@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { FaEdit } from 'react-icons/fa'
+import { FaEdit } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 
 export default class DisplayCustomers extends Component {
     constructor(props) {
@@ -94,7 +95,9 @@ export default class DisplayCustomers extends Component {
                 <div className='search-item'>{this.props.animalType}</div>
                 <div className='search-item'>{this.props.phone}</div>
                 <div className='search-item'>
-                    {moment(this.props.schedDate).utc().format('l')}
+                    <Link to={`/oneday/${this.props.slotId}`}>
+                        {moment(this.props.schedDate).utc().format('l')}
+                    </Link>
                 </div>
                 <div className='search-item'>{this.props.schedStatus}</div>
                 <div className='search-item'>
