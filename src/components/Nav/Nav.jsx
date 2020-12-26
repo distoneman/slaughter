@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { FaCog, FaHome, FaSearch, FaListOl } from 'react-icons/fa';
+import { FaCog, FaHome, FaSearch, FaListOl, FaAdn } from 'react-icons/fa';
 
 import './Nav.css';
 
@@ -22,6 +22,7 @@ export default class Nav extends Component {
                         className='nav-link'>
                         <FaSearch className='nav-search-icon' />
                     </Link>
+                        <FaAdn className='nav-search-icon' />
                     <Link to={`/waitlist`} className='nav-link'>
                         <FaListOl className='nav-list-icon' />
                     </Link>
