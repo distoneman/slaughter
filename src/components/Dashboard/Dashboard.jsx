@@ -51,7 +51,7 @@ export default class Dashboard extends Component {
             this.setState({
                 dailyDetail: res.data
             })
-            await console.log(res.data)
+            // await console.log(res.data)
             // console.log(this.state.dailyDetail)
         }
     }
@@ -61,7 +61,7 @@ export default class Dashboard extends Component {
 
     render() {
         if (this.state.dailyDetail.length === 0) {
-            var displayDays = "No data for selected criteria click 'Add' button to populate using defaults. Then search again."
+            var displayDays = "Enter search criteria to display data"
         }
         else {
             displayDays = this.state.dailyDetail.map(day => {
@@ -78,6 +78,7 @@ export default class Dashboard extends Component {
                         used_slots = {day.used_slots}
                         available_slots = {availableSlots}
                         max_slots = {day.max_slots}
+                        cancelled_slots = {day.cancelled_slots}
                         getDailyDetail = {this.getDailyDetail}
                         // toggleSlotsModal = {this.toggleEditSlots}
                     />
@@ -107,6 +108,7 @@ export default class Dashboard extends Component {
                     <option value="2021">2021</option>
                     <option value="2022">2022</option>
                     <option value="2023">2023</option>
+                    <option value="2024">2024</option>
                 </select>
                 <label className='search-label'>Month:</label>
                 <select name="month" id="month" className='search-select'
@@ -134,6 +136,7 @@ export default class Dashboard extends Component {
                     <div className='search-results-item-title'>Date</div>
                     <div className='search-results-item-title'>Animal</div>
                     <div className='search-results-item-title'>Available Slots</div>
+                    <div className='search-results-item-title'>Cancelled Slots</div>
                     <div className='search-results-item-title'></div>
                     {displayDays}
                 </div>

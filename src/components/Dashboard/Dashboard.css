@@ -72,7 +72,7 @@
     display: grid;
     z-index: 1;
     /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr .7fr .8fr .8fr .8fr;
     margin-left: 3em;
 }
 
