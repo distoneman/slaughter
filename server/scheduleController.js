@@ -64,7 +64,7 @@ module.exports = {
         res.status(200).send(response)
     },
     updateConfirmedStatus: async (req, res) => {
-        let { id, schedDate, animalType } = req.body
+        let { id, schedDate, animalType} = req.body
         const db = req.app.get('db')
         let response = await db.settings.updateConfirmed({ 
             id, schedDate, animalType })
@@ -82,13 +82,14 @@ module.exports = {
     },
     updateCustomer: async(req, res) => {
         // console.log('update')
+        // console.log(req.body)
         let {id, custName, custPhone, notes, 
             schedDate, animalType, 
-            waitlistFlag} = req.body
+            waitlistFlag, schedStatus} = req.body
         const db = req.app.get('db')
         let response = await db.settings.updateCustomer({
             id, custName, custPhone, notes, 
-            schedDate, animalType, waitlistFlag
+            schedDate, animalType, waitlistFlag, schedStatus
         })
         res.status(200).send(response)
     },

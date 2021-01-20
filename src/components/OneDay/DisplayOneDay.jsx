@@ -20,6 +20,7 @@ export default class DisplayOneDay extends Component {
             editModal: false,
             custName: '',
             custPhone: '',
+            schedStatus: '',
             notes: '',
         }
     }
@@ -38,6 +39,7 @@ export default class DisplayOneDay extends Component {
             custName: this.props.custName,
             custPhone: this.props.custPhone,
             notes: this.props.notes,
+            schedStatus: this.props.schedStatus,
             waitlistFlag: this.props.waitlistFlag
         })
         // console.log(this.state)
@@ -101,7 +103,7 @@ export default class DisplayOneDay extends Component {
         this.setState({
             [key]: value.target.value
         })
-        // await console.log(this.state.custName)
+        // await console.log(this.state.schedStatus)
     }
 
     cancel = async () => {
@@ -110,10 +112,10 @@ export default class DisplayOneDay extends Component {
     }
 
     update = async () => {
-        // console.log('update customer')
-        // console.log(this.state)
-        // console.log(this.props.id)
-        await this.props.updateCustomer(this.props.id, this.state.custName, this.state.custPhone, this.state.notes, this.state.waitlistFlag)
+        console.log('update customer')
+        console.log(this.state)
+        console.log(this.props.id)
+        await this.props.updateCustomer(this.props.id, this.state.custName, this.state.custPhone, this.state.notes, this.state.waitlistFlag, this.state.schedStatus)
         // console.log(res.data)
         this.toggleEditModal()
     }
@@ -190,6 +192,14 @@ export default class DisplayOneDay extends Component {
                             <input type="checkbox" className='form-checkbox'
                                 checked={this.state.waitlistFlag}
                                 onChange={e => this.toggleWaitlistFlag()} />
+                            <label className='form-label'>Status: </label>
+                            <select name='schedStatus' id='schedStatus' className='search-select' 
+                                defaultValue={this.props.schedStatus}
+                                onChange={e => this.handleChange('schedStatus', e)}>
+                                <option value={this.props.schedStatus}>{this.props.schedStatus}</option>
+                                <option value="Scheduled">Scheduled</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
                             <label className='form-label'>Notes: </label>
                             <input className='form-user-input' defaultValue={this.props.notes}
                                 onChange={e => this.handleChange('notes', e)} />

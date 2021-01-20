@@ -2,7 +2,8 @@ UPDATE k_schedule
     SET cust_name = $(custName),
         cust_phone = $(custPhone),
         notes = $(notes),
-        waitlist_flag = $(waitlistFlag)
+        waitlist_flag = $(waitlistFlag),
+        sched_status = $(schedStatus)
     WHERE sched_id = $(id);
 
 SELECT * FROM k_schedule

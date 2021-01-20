@@ -126,12 +126,12 @@ cancelSchedule = async (id, cancelledBy) => {
     })
 }
 
-updateCustomer = async (id, custName, custPhone, notes, waitlistFlag) => {
+updateCustomer = async (id, custName, custPhone, notes, waitlistFlag, schedStatus) => {
     // console.log(id, custName, custPhone, notes)
     let schedDate = this.state.schedDate
     let animalType = this.state.animalType
     const res = await axios.put(`/schedule/updateCustomer`, 
-        {id, custName, custPhone, notes, schedDate, animalType, waitlistFlag})
+        {id, custName, custPhone, notes, schedDate, animalType, waitlistFlag, schedStatus})
     // await console.log(res.data)
     this.setState({
         daysSchedule: res.data

@@ -51,7 +51,8 @@ export default class Dashboard extends Component {
             this.setState({
                 dailyDetail: res.data
             })
-            // await console.log(res.data)
+            await console.log(res.data)
+            // console.log(this.state.dailyDetail)
         }
     }
 
