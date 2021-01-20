@@ -22,6 +22,7 @@ export default class DisplayOneDay extends Component {
             custPhone: '',
             schedStatus: '',
             notes: '',
+            rescheduledFlag: false,
         }
     }
 
@@ -99,7 +100,25 @@ export default class DisplayOneDay extends Component {
 
     async handleChange(key, value) {
         // console.log(key)
+        this.setState({
+            rescheduledFlag: false
+        })
         // console.log(value.target.value)
+        if (key === 'schedStatus'){
+            // console.log('in status flag change')
+            // console.log(value.target.value)
+            if(this.props.schedStatus === 'Cancelled' &&
+                value.target.value === 'Scheduled'){
+                    // console.log('rescheduled')
+                    this.setState({
+                        rescheduledFlag: true
+                    })
+                }
+        }
+        else {
+            // console.log('not sched status')
+            // console.log(this.state.rescheduledFlag)
+        }
         this.setState({
             [key]: value.target.value
         })
@@ -112,10 +131,10 @@ export default class DisplayOneDay extends Component {
     }
 
     update = async () => {
-        console.log('update customer')
-        console.log(this.state)
-        console.log(this.props.id)
-        await this.props.updateCustomer(this.props.id, this.state.custName, this.state.custPhone, this.state.notes, this.state.waitlistFlag, this.state.schedStatus)
+        // console.log('update customer')
+        // console.log(this.state)
+        // console.log(this.props)
+        await this.props.updateCustomer(this.props.id, this.state.custName, this.state.custPhone, this.state.notes, this.state.waitlistFlag, this.state.schedStatus, this.state.rescheduledFlag, this.props.slotId)
         // console.log(res.data)
         this.toggleEditModal()
     }
@@ -198,7 +217,7 @@ export default class DisplayOneDay extends Component {
                                 onChange={e => this.handleChange('schedStatus', e)}>
                                 <option value={this.props.schedStatus}>{this.props.schedStatus}</option>
                                 <option value="Scheduled">Scheduled</option>
-                                <option value="Cancelled">Cancelled</option>
+                                {/* <option value="Cancelled">Cancelled</option> */}
                             </select>
                             <label className='form-label'>Notes: </label>
                             <input className='form-user-input' defaultValue={this.props.notes}

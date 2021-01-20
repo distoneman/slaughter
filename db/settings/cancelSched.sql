@@ -4,6 +4,10 @@ SET sched_status = 'Cancelled', status_change_date = $(statusDate),
     cancelled_by = $(cancelledBy)
 WHERE sched_id = $(id);
 
+UPDATE k_slots set 
+    cancelled_slots = (cancelled_slots + 1)
+    WHERE id = $(slotId);
+
 SELECT * FROM k_schedule
 WHERE sched_date = $(schedDate) 
 AND animal_type = $(animalType) 

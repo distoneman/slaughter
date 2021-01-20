@@ -93,12 +93,13 @@ getScheduleByDate = async (direction) => {
         // console.log(res.data)
         this.setState({
             schedDate: searchDate,
-            slotId: res.data[0].id,
+            slotId: res.data[0].k_slots_id,
             // animalType: res.data[0].animal_type,
             daysSchedule: []
         })
         
     } else {
+        console.log(res.data[0])
         this.setState({
             schedDate: res.data[0].sched_date,
             animalType: res.data[0].animal_type,
@@ -112,26 +113,28 @@ getScheduleByDate = async (direction) => {
 
 cancelSchedule = async (id, cancelledBy) => {
     // console.log('cancel schedule')
-    // console.log(id)
+    console.log(this.state)
     // console.log(cancelledBy)
     let schedDate = this.state.schedDate
     let animalType = this.state.animalType
+    let slotId = this.state.slotId
     let statusDate = moment(new Date()).format('l')
     // console.log(statusDate)
     const res = await axios.put(`/schedule/cancel`,
-        { id, schedDate, animalType, statusDate, cancelledBy })
+        { id, slotId, schedDate, animalType, statusDate, cancelledBy })
     // console.log(res.data)
     this.setState({
         daysSchedule: res.data
     })
 }
 
-updateCustomer = async (id, custName, custPhone, notes, waitlistFlag, schedStatus) => {
+updateCustomer = async (id, custName, custPhone, notes, waitlistFlag, schedStatus, rescheduledFlag, slotId) => {
     // console.log(id, custName, custPhone, notes)
+    console.log(rescheduledFlag)
     let schedDate = this.state.schedDate
     let animalType = this.state.animalType
     const res = await axios.put(`/schedule/updateCustomer`, 
-        {id, custName, custPhone, notes, schedDate, animalType, waitlistFlag, schedStatus})
+        {id, custName, custPhone, notes, schedDate, animalType, waitlistFlag, schedStatus, rescheduledFlag, slotId})
     // await console.log(res.data)
     this.setState({
         daysSchedule: res.data

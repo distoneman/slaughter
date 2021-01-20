@@ -17,6 +17,7 @@ CREATE TABLE k_slots(
     animal_type VARCHAR(20),
     max_slots NUMERIC(10,0),
     used_slots NUMERIC(10,0),
+    cancelled_slots NUMERIC(10,0) DEFAULT '0',
     notes VARCHAR(250));
     
 CREATE TABLE k_monthly_defaults(

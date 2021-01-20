@@ -37,10 +37,10 @@ module.exports = {
         res.status(200).send(response)
     },
     cancelSched: async (req, res) => {
-        const { id, schedDate, animalType, statusDate, cancelledBy } = req.body;
+        const { id, slotId, schedDate, animalType, statusDate, cancelledBy } = req.body;
         const db = req.app.get('db');
         let response = await db.settings.cancelSched({
-            id, schedDate, animalType, statusDate, cancelledBy
+            id, slotId, schedDate, animalType, statusDate, cancelledBy
         })
         res.status(200).send(response)
     },
@@ -85,12 +85,17 @@ module.exports = {
         // console.log(req.body)
         let {id, custName, custPhone, notes, 
             schedDate, animalType, 
-            waitlistFlag, schedStatus} = req.body
+            waitlistFlag, schedStatus, rescheduledFlag, slotId} = req.body
         const db = req.app.get('db')
         let response = await db.settings.updateCustomer({
             id, custName, custPhone, notes, 
             schedDate, animalType, waitlistFlag, schedStatus
         })
+        if(rescheduledFlag === true){
+            // console.log('rescheduled is true')
+            // console.log(slotId)
+            let response2 = await db.settings.unCancel({slotId})
+        }
         res.status(200).send(response)
     },
     deleteAppointment: async(req, res) => {
