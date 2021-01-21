@@ -93,7 +93,8 @@ getScheduleByDate = async (direction) => {
         // console.log(res.data)
         this.setState({
             schedDate: searchDate,
-            slotId: res.data[0].k_slots_id,
+            // slotId: res.data[0].k_slots_id,
+            slotId: res.data[0].id,
             // animalType: res.data[0].animal_type,
             daysSchedule: []
         })
