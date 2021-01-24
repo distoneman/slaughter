@@ -7,3 +7,11 @@ WHERE sched_id = $(replaceId);
 
 UPDATE k_schedule SET sched_status = 'Cancelled', status_change_date = NOW(), waitlist_flag = false
 WHERE sched_id = $(schedId);
+
+UPDATE k_slots set 
+    cancelled_slots = (cancelled_slots - 1)
+    WHERE id = $(slotId);
+
+UPDATE k_slots set 
+    cancelled_slots = (cancelled_slots + 1)
+    WHERE id = $(OldSlotId);

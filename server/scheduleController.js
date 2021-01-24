@@ -55,11 +55,11 @@ module.exports = {
     },
     fillFromWaitlist: async (req, res) => {
         const { slotId, schedDate, animalType, custName, custPhone,
-            notes, replaceId, schedId } = req.body
+            notes, replaceId, OldSlotId, schedId } = req.body
         const db = req.app.get('db')
         let response = await db.settings.fillFromWaitlist({
             slotId, schedDate, animalType, custName, custPhone,
-            notes, replaceId, schedId
+            notes, replaceId, OldSlotId, schedId
         })
         res.status(200).send(response)
     },

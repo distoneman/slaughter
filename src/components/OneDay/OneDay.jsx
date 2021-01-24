@@ -100,7 +100,7 @@ getScheduleByDate = async (direction) => {
         })
         
     } else {
-        console.log(res.data[0])
+        // console.log(res.data[0])
         this.setState({
             schedDate: res.data[0].sched_date,
             animalType: res.data[0].animal_type,
