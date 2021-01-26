@@ -25,15 +25,16 @@ export default class DisplayCustomers extends Component {
     }
 
     toggleEditModal = async () => {
-        // console.log(this.props)
+        // console.log(this.props.schedStatus)
         await this.setState({
             editModal: !this.state.editModal,
             custName: this.props.custName,
             custPhone: this.props.custPhone,
             notes: this.props.notes,
+            schedStatus: this.props.schedStatus,
             waitlistFlag: this.props.waitlistFlag
         })
-        // console.log(this.state)
+        console.log(this.state)
     }
 
     async toggleWaitlistFlag() {
@@ -46,8 +47,8 @@ export default class DisplayCustomers extends Component {
     update = async () => {
         // console.log('update customer')
         // console.log(this.state)
-        // console.log(this.props.id)
-        await this.props.updateCustomer(this.props.id, this.state.custName, this.state.custPhone, this.state.notes, this.state.waitlistFlag)
+        // console.log(this.props)
+        await this.props.updateCustomer(this.props.id, this.state.custName, this.state.custPhone, this.state.notes, this.state.waitlistFlag, this.props.schedStatus)
         // console.log(res.data)
         this.toggleEditModal()
     }

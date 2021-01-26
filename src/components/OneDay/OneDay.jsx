@@ -114,7 +114,7 @@ getScheduleByDate = async (direction) => {
 
 cancelSchedule = async (id, cancelledBy) => {
     // console.log('cancel schedule')
-    console.log(this.state)
+    // console.log(this.state)
     // console.log(cancelledBy)
     let schedDate = this.state.schedDate
     let animalType = this.state.animalType
@@ -131,7 +131,7 @@ cancelSchedule = async (id, cancelledBy) => {
 
 updateCustomer = async (id, custName, custPhone, notes, waitlistFlag, schedStatus, rescheduledFlag, slotId) => {
     // console.log(id, custName, custPhone, notes)
-    console.log(rescheduledFlag)
+    // console.log(rescheduledFlag)
     let schedDate = this.state.schedDate
     let animalType = this.state.animalType
     const res = await axios.put(`/schedule/updateCustomer`, 

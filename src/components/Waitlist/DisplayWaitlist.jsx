@@ -21,8 +21,8 @@ export default class DisplayWaitlist extends Component {
         if (this.props.swapAllowed === false) {
 
         } else {
-            console.log(this.props.slotId)   // k_slots id of original date
-            console.log(this.props.replaceSlotId)  
+            // console.log(this.props.slotId)   // k_slots id of original date
+            // console.log(this.props.replaceSlotId)  
             await axios.post('/schedule/fill_from_waitlst', {
                 schedId: this.props.id,  // k_schedule sched_id
                 schedDate: this.props.replaceDate,
