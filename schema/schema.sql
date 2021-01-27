@@ -28,18 +28,18 @@ CREATE TABLE k_monthly_defaults(
     default_max_slots NUMERIC(10,0)
     );
 
-CREATE TABLE alt_list(
+CREATE TABLE k_alt_list(
     alt_id serial PRIMARY KEY,
-    status_date DATE,
+    added_date DATE,
     removal_date DATE,
     animal_type VARCHAR(20),
-    total_animals NUMERIC(10,0),
     cust_name VARCHAR(150),
     cust_phone VARCHAR(30),
-    sched_status VARCHAR(25),
-    notes VARCHAR(250));
+    status VARCHAR(25),
+    notes VARCHAR(250)
+    );
 
-GRANT ALL PRIVILEGES ON TABLE alt_list TO circlev;    
+GRANT ALL PRIVILEGES ON TABLE k_alt_list TO circlev;    
 GRANT ALL PRIVILEGES ON TABLE k_monthly_defaults TO circlev;
 GRANT ALL PRIVILEGES ON TABLE k_schedule TO circlev;
 GRANT ALL PRIVILEGES ON TABLE k_slots TO circlev;    

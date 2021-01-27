@@ -22,7 +22,9 @@ export default class Nav extends Component {
                         className='nav-link'>
                         <FaSearch className='nav-search-icon' />
                     </Link>
+                    <Link to={`/altlist`}>
                         <FaAdn className='nav-search-icon' />
+                    </Link>
                     <Link to={`/waitlist`} className='nav-link'>
                         <FaListOl className='nav-list-icon' />
                     </Link>

@@ -43,6 +43,9 @@ app.put('/schedule/confirm', scheduleCtrl.updateConfirmedStatus);
 app.get('/schedule/getSlotId/', scheduleCtrl.getSlotId);
 app.put('/schedule/updateCustomer', scheduleCtrl.updateCustomer);
 app.put('/schedule/deleteAppointment', scheduleCtrl.deleteAppointment);
+app.post('/schedule/addToAltList', scheduleCtrl.addToAltList);
+app.put('/schedule/removeFromAltList', scheduleCtrl.removeFromAltList);
+app.get('/schedule/getAltList/', scheduleCtrl.getAltList)
 
 // SEARCH
 app.get('/search/by_name/:name', searchCtrl.getCustomerByName);

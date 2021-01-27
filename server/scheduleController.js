@@ -105,6 +105,15 @@ module.exports = {
             id, slotId, schedDate, animalType
         })
         res.status(200).send(response)
+    },
+    addToAltList: async(req, res) => {
+        console.log("add to alt list")
+    },
+    removeFromAltList: async(req, res) => {
+        console.log("remove from alt list")
+    },
+    getAltList: async(req, res) => {
+        console.log("get alt list")
     }
 }
 

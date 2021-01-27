@@ -5,7 +5,8 @@ INSERT INTO k_schedule (k_slots_id, sched_date, animal_type, cust_name, cust_pho
 UPDATE k_schedule SET sched_status = 'Replaced', status_change_date = NOW()
 WHERE sched_id = $(replaceId);
 
-UPDATE k_schedule SET sched_status = 'Cancelled', status_change_date = NOW(), waitlist_flag = false
+UPDATE k_schedule SET sched_status = 'Cancelled', status_change_date = NOW(), waitlist_flag = false,
+    notes = CONCAT('Rescheduled from waitlist - ', notes)
 WHERE sched_id = $(schedId);
 
 UPDATE k_slots set 
@@ -15,3 +16,5 @@ UPDATE k_slots set
 UPDATE k_slots set 
     cancelled_slots = (cancelled_slots + 1)
     WHERE id = $(OldSlotId);
+
+

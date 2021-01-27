@@ -5,6 +5,7 @@ import Settings from './components/Settings/Settings';
 import OneDay from './components/OneDay/OneDay';
 import SearchCustomer from './components/SearchCustomer/SearchCustomer';
 import Waitlist from './components/Waitlist/Waitlist';
+import AltList from './components/AltList/AltList';
 
 export default (
     <Switch>
@@ -13,5 +14,6 @@ export default (
         <Route exact path='/oneday/:id' component={OneDay} />
         <Route exact path='/search' component={SearchCustomer} />
         <Route exact path='/waitlist' component={Waitlist} />
+        <Route exaxt path='/altlist' component={AltList} />
     </Switch>
 )
