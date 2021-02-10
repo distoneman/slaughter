@@ -63,8 +63,8 @@ export default class AltList extends Component {
     }
 
     removeFromList = async (id) => {
-        console.log('remove from list')
-        console.log(id)
+        // console.log('remove from list')
+        // console.log(id)
         let searchAnimalType = this.state.searchAnimalType
         const res = await axios.put(`/schedule/removeFromAltList`, {id, searchAnimalType})
         await this.setState({
