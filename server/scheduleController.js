@@ -1,7 +1,7 @@
 module.exports = {
     getAvailable: async (req, res) => {
-        let id = `${req.params.id}`;
-        const db = req.app.get('db');
+                let id = `${req.params.id}`;
+const db = req.app.get('db');
         let response = await db.settings.getAvailable({
             id
         })
@@ -64,13 +64,14 @@ module.exports = {
         res.status(200).send(response)
     },
     updateConfirmedStatus: async (req, res) => {
-        let { id, schedDate, animalType} = req.body
+        let { id, schedDate, animalType } = req.body
         const db = req.app.get('db')
-        let response = await db.settings.updateConfirmed({ 
-            id, schedDate, animalType })
+        let response = await db.settings.updateConfirmed({
+            id, schedDate, animalType
+        })
         res.status(200).send(response)
     },
-    getSlotId: async(req, res) => {
+    getSlotId: async (req, res) => {
         // console.log('get slot id')
         let animalType = req.query.animalType;
         let schedDate = req.query.schedDate;
@@ -80,46 +81,58 @@ module.exports = {
         })
         res.status(200).send(response)
     },
-    updateCustomer: async(req, res) => {
+    updateCustomer: async (req, res) => {
         // console.log('update')
         // console.log(req.body)
-        let {id, custName, custPhone, notes, 
-            schedDate, animalType, 
-            waitlistFlag, schedStatus, rescheduledFlag, slotId} = req.body
+        let { id, custName, custPhone, notes,
+            schedDate, animalType,
+            waitlistFlag, schedStatus, rescheduledFlag, slotId } = req.body
         const db = req.app.get('db')
         let response = await db.settings.updateCustomer({
-            id, custName, custPhone, notes, 
+            id, custName, custPhone, notes,
             schedDate, animalType, waitlistFlag, schedStatus
         })
-        if(rescheduledFlag === true){
+        if (rescheduledFlag === true) {
             // console.log('rescheduled is true')
             // console.log(slotId)
-            let response2 = await db.settings.unCancel({slotId})
+            let response2 = await db.settings.unCancel({ slotId })
         }
         res.status(200).send(response)
     },
-    deleteAppointment: async(req, res) => {
-        let {id, slotId, schedDate, animalType} = req.body
+    deleteAppointment: async (req, res) => {
+        let { id, slotId, schedDate, animalType } = req.body
         const db = req.app.get('db')
         let response = await db.settings.deleteAppointment({
             id, slotId, schedDate, animalType
         })
         res.status(200).send(response)
     },
-    addToAltList: async(req, res) => {
-        console.log("add to alt list")
+    addToAltList: async (req, res) => {
+        // console.log("add to alt list")
+        let { addDate, animalType, totalAnimals, custName,
+            custPhone, notes } = req.body
+        const db = req.app.get('db')
+        let response = await db.settings.addAltList({
+            addDate, animalType, totalAnimals, custName,
+            custPhone, notes
+        })
+        res.status(200).send(response)
     },
-    removeFromAltList: async(req, res) => {
-        console.log("remove from alt list")
+    removeFromAltList: async (req, res) => {
+        // console.log("remove from alt list")
+        let {id, searchAnimalType} = req.body
+        const db  = req.app.get('db')
+        let response = await db.settings.removeFromAltList({id,
+            searchAnimalType})
+        res.status(200).send(response)
     },
-    getAltList: async(req, res) => {
-        console.log("get alt list")
+    getAltList: async (req, res) => {
+        // console.log("get alt list")
+        let animalType = `${req.params.searchAnimalType}`
+        const db = req.app.get('db')
+        // console.log(animalType)
+        let response = await db.settings.getAltList({animalType})
+        res.status(200).send(response)
     }
 }
 
-// let id = `${req.params.id}`;
-// const db = req.app.get('db');
-// let response = await db.settings.getOneDay({
-//     id
-// })
-// res.status(200).send(response)

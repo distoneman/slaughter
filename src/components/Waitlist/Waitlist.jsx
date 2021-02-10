@@ -57,7 +57,9 @@ export default class Waitlist extends Component {
             )
         })
         return (
-            <div>
+            <div className='search-bar'>
+                <div className='page-heading'>Waitlist</div>
+                <hr />
                 <div className='search-bar'>
                     <label className='form-label'>Animal Type:</label>
                     <select name='animal-type' id='animal-type'

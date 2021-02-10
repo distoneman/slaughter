@@ -31,8 +31,8 @@ CREATE TABLE k_monthly_defaults(
 CREATE TABLE k_alt_list(
     alt_id serial PRIMARY KEY,
     added_date DATE,
-    removal_date DATE,
     animal_type VARCHAR(20),
+    total_animals VARCHAR(10),
     cust_name VARCHAR(150),
     cust_phone VARCHAR(30),
     status VARCHAR(25),

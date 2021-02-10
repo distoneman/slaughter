@@ -45,7 +45,7 @@ app.put('/schedule/updateCustomer', scheduleCtrl.updateCustomer);
 app.put('/schedule/deleteAppointment', scheduleCtrl.deleteAppointment);
 app.post('/schedule/addToAltList', scheduleCtrl.addToAltList);
 app.put('/schedule/removeFromAltList', scheduleCtrl.removeFromAltList);
-app.get('/schedule/getAltList/', scheduleCtrl.getAltList)
+app.get('/schedule/getAltList/:searchAnimalType', scheduleCtrl.getAltList)
 
 // SEARCH
 app.get('/search/by_name/:name', searchCtrl.getCustomerByName);
